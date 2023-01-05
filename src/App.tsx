@@ -1,25 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux/es/exports";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import { mangaData } from "./components/axios/api";
+import { Header } from "./components/header/header";
+import { Manga } from "./components/manga/manga";
+import { addManga } from "./components/redux/reducer/mangaSlice/mangaSlice";
 
 function App() {
+  const scroll = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const next = () => {
+    setCurrentPage((prevState) => prevState + 20);
+    scroll();
+  };
+  const prev = () => {
+    setCurrentPage((prevState) => prevState - 20);
+    scroll();
+  };
+
+ 
+ const [currentPage, setCurrentPage] = useState(0);
+
+ const dispatch = useDispatch();
+ const getManga = async () => {
+   try {
+     const resultManga = await mangaData.get(
+       `/manga?page%5Blimit%5D=20&page%5Boffset%5D=${currentPage}`
+     );
+     dispatch(addManga({ mangaData: resultManga.data }));
+   } catch (err) {
+     console.log(err);
+   }
+ };
+
+  useEffect(() => {
+    getManga();
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/anime" element={<Manga />} />
+        <Route path="/manga" element={<Manga />} />
+      </Routes>
+      <button onClick={prev}>prev</button>
+         <button onClick={next}>next</button>
+    </Router>
   );
 }
 
