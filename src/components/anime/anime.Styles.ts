@@ -3,12 +3,12 @@ interface Props {
   img: any;
 }
 
-export const MangaLink = styled.a<Props>`
+export const AnimeLink = styled.a<Props>`
   background-image: url(${(p) => p.img});
   background-size: cover;
   background-position: center;
   text-decoration: none;
-  color: ${({theme}) => (theme === "light" ? "black" : "white")};
+  color: white;
   display: flex;
   width: 200px;
   height: 300px;
@@ -16,15 +16,16 @@ export const MangaLink = styled.a<Props>`
   border-radius: 5px 5px 5px 5px;
 `;
 
-export const AllManga = styled.div`
+export const AllAnime = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 30px auto 0;
   gap: 30px;
   width: 1170px;
+// background: white;
 `;
 
-export const MangaTitle = styled.div`
+export const AnimeTitle = styled.div`
   background-image: linear-gradient(
     0deg,
     rgba(0, 0, 0, 0.8) 0,
@@ -37,7 +38,7 @@ export const MangaTitle = styled.div`
   border-radius: 0 0 5px 5px;
 `;
 
-export const MangaWrapper = styled.div`
+export const AnimeWrapper = styled.div`
   border-radius: 5px 5px 5px 5px;
   box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 `;

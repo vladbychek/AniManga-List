@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { mangaData } from "../axios/api";
 import { getFullMangaInfo } from "../redux/reducer/mangaSlice/mangaSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Oval, ThreeCircles } from "react-loader-spinner";
+import { ThreeCircles } from "react-loader-spinner";
 import {
   FullInfoMangaAbout,
   FullInfoMangaAll,
@@ -13,9 +12,10 @@ import {
   FullMangaNotSpan,
   FullMangaSpan,
   FullMangaTitleAndAboutWrapper,
-  Loaderrr,
-  MoreInfo,
+  LoaderrrManga,
+  MoreInfoManga,
 } from "./fullMangaInfo.Styles";
+import { axiosData } from "../axios/api";
 
 export const FullInfoManga = () => {
   const [loading, isLoading] = useState(true);
@@ -29,7 +29,8 @@ export const FullInfoManga = () => {
   const getFullMangaInformation = async () => {
     try {
       isLoading(true);
-      const resultFullInfoManga = await mangaData.get(`/manga/${id}`);
+      const resultFullInfoManga = await axiosData.get(`/manga/${id}`);
+      console.log(resultFullInfoManga.data.data)
       isLoading(false);
       dispatch(getFullMangaInfo({ mangaData: resultFullInfoManga.data }));
     } catch (err) {
@@ -43,7 +44,7 @@ export const FullInfoManga = () => {
 
   return (
     <>
-    <Loaderrr>
+    <LoaderrrManga>
         <ThreeCircles
         height="200"
         width="200"
@@ -51,7 +52,7 @@ export const FullInfoManga = () => {
         visible={loading}
         ariaLabel="three-circles-rotating"
       />
-      </Loaderrr>
+      </LoaderrrManga>
       {!loading && (
         <FullInfoMangaAll>
           <FullMangaInfoImgAndTitleWrapper>
@@ -64,7 +65,7 @@ export const FullInfoManga = () => {
               <FullInfoMangaAbout>{`${FullInfoMangaStore.data.attributes.description}`}</FullInfoMangaAbout>
             </FullMangaTitleAndAboutWrapper>
           </FullMangaInfoImgAndTitleWrapper>
-          <MoreInfo>
+          <MoreInfoManga>
             <FullMangaNotSpan>
               Type<br></br>
               <FullMangaSpan>
@@ -101,7 +102,7 @@ export const FullInfoManga = () => {
                 {FullInfoMangaStore.data.attributes.chapterCount}
               </FullMangaSpan>
             </FullMangaNotSpan>
-          </MoreInfo>
+          </MoreInfoManga>
         </FullInfoMangaAll>
       )}
     </>

@@ -10,11 +10,11 @@ const mangaSlice = createSlice({
   initialState,
   reducers: {
     addManga: (state: any, action) => {
-      action.payload.mangaData.data.map((item: any) => state.mangaArr.push(item));
+      action.payload.axiosData.data.map((item: any) => state.mangaArr.push(item));
     },
     getFullMangaInfo: (state: any, action) => {
       state.fullMangaInfoArr = action.payload.mangaData
-
+      console.log("manga",state.fullMangaInfoArr)
     }
   },
 });

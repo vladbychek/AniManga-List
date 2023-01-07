@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { mangaData } from "../axios/api";
-import { getFullMangaInfo } from "../redux/reducer/mangaSlice/mangaSlice";
+import { useTheme } from "../../themeContext";
+import { MaterialUISwitch } from "../switch/switch";
 import { AllManga, MangaLink, MangaTitle, MangaWrapper } from "./manta.Styles";
 
 export const Manga = () => {
   const MangaStore = useSelector((state: any) => state.manga.mangaArr);
-console.log('zzz', MangaStore)
+  const currentTheme = useTheme();
 
   return (
     <>
+  <MaterialUISwitch onClick={currentTheme.toggler}/>
       <AllManga>
         {MangaStore?.map((manga: any) => (
-          <Link  to={`${manga.id}`}>
+          <Link to={`${manga.id}`}>
             <MangaWrapper>
               <MangaLink img={manga.attributes.posterImage.original}>
                 <MangaTitle>{manga.attributes.canonicalTitle}</MangaTitle>
