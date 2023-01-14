@@ -1,12 +1,14 @@
-import { LoginButton, LoginCard, LoginInput, LoginText, LoginText2, LoginTitle, LoginWrapper } from "./loginForm.Styles"
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { FormWrapper, FormTitle, FormText, FormCard, FormInput, FormText2, FormButton } from "../common/form.Styles";
+import { useTheme } from "../../themeContext";
 
 
 export const LoginForm = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isValid, setIsValid] = useState(false)
+    const currentTheme = useTheme();
 
     const handleChangeUsername = (event: any) => {
         setUsername(event.target.value)
@@ -29,29 +31,19 @@ export const LoginForm = () => {
         } else {
             setIsValid(false)
         }
-
-        // if (username) {
-		// 	minLengthUsername ? setIsErrorName(false) : setIsErrorName(true);
-		// }
-
-		// if (password && passwordLetters) {
-		// 	passwordNumbers && passwordLetters
-		// 		? setIsErrorPassword(false)
-		// 		: setIsErrorPassword(true);
-		// }
     }, [username, password])
     return(
         <>
-            <LoginWrapper>
-                <LoginTitle>Login</LoginTitle>
-                <LoginText>Enter your credentials</LoginText>
-                <LoginCard action="">
-                    <LoginInput onChange={(event) => handleChangeUsername(event)} value={username} required type="text" placeholder="Username" />
-                    <LoginInput onChange={(event) => handleChangePassword(event)} value={password} required type="text" placeholder="Password" />
-                    <LoginText2>Don't have account? <NavLink to={"/signUp"}>SignUp</NavLink></LoginText2> 
-                    <LoginButton disabled={!isValid}>Login</LoginButton>
-                </LoginCard>
-            </LoginWrapper>
+            <FormWrapper theme={currentTheme.theme}>
+                <FormTitle>Login</FormTitle>
+                <FormText>Enter your credentials</FormText>
+                <FormCard action="">
+                    <FormInput onChange={(event) => handleChangeUsername(event)} value={username} required type="text" placeholder="Username" />
+                    <FormInput onChange={(event) => handleChangePassword(event)} value={password} required type="text" placeholder="Password" />
+                    <FormText2>Don't have account? <NavLink to={"/signUp"}>SignUp</NavLink></FormText2> 
+                    <FormButton disabled={!isValid}>Login</FormButton>
+                </FormCard>
+            </FormWrapper>
         </>
     )
 }

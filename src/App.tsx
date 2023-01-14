@@ -11,10 +11,11 @@ import { LoginForm } from "./components/loginForm.tsx/loginForm";
 import { MainPage } from "./components/mainPage/mainPage";
 import { Manga } from "./components/manga/manga";
 import { addAnime } from "./components/redux/reducer/animeSlice/animeSlice";
-import { addManga } from "./components/redux/reducer/mangaSlice/mangaSlice";
+import { addManga, getSortedMangaList } from "./components/redux/reducer/mangaSlice/mangaSlice";
 import { SignUpForm } from "./components/signUpForm/signUpForm";
 import { ThemeContext, ThemeType } from "./themeContext";
 
+// тотал каунт
 // вход только залогиненым
 // пароль чтобы можно было смотреть
 // подключение сервера
@@ -25,29 +26,34 @@ import { ThemeContext, ThemeType } from "./themeContext";
 // Добавить типы
 // сделать правильно иморты
 // Разбить всё по компонентам
+// адаптив
+// фикс невлезающего текста
+
 
 function App() {
   const [myTheme, setMyTheme] = useState<ThemeType>("light");
   const [currentMangaPage, setCurrentMangaPage] = useState(0);
-  const [currentAnimePage, setCurrentAnimePage] = useState(0);
-
   const [fetching, setFetching] = useState(true);
-  const [totalCount, setTotalCount] = useState(0);
-
+  const [fetchingSort, setFetchingSort] = useState(true);
+  const [currentAnimePage, setCurrentAnimePage] = useState(0);
+  const [sortedBy, setSortedBy] = useState("ratingRank");
+  console.log(fetching)
   const dispatch = useDispatch();
+
   const getManga = async () => {
     try {
       const resultManga = await axiosData.get(
-        `/manga?page%5Blimit%5D=20&page%5Boffset%5D=${currentMangaPage}`
+        `/manga?page%5Blimit%5D=20&page%5Boffset%5D=${currentMangaPage}&sort=${sortedBy}`
       );
-      dispatch(addManga({ axiosData: resultManga.data }));
       setCurrentMangaPage((prevState) => prevState + 20);
+      dispatch(addManga({ axiosData: resultManga.data }));
     } catch (err) {
       console.log(err);
     } finally {
       setFetching(false);
     }
   };
+
   const getAnime = async () => {
     try {
       const resultAnime = await axiosData.get(
@@ -61,7 +67,6 @@ function App() {
       setFetching(false);
     }
   };
-
   useEffect(() => {
     if (fetching) {
       getManga();
@@ -96,10 +101,41 @@ function App() {
     }
   };
 
+  const getSortedManga = async () => {
+    try {
+      const resultManga = await axiosData.get(
+        `/manga?page%5Blimit%5D=20&page%5Boffset%5D=0&sort=${sortedBy}`
+      );
+      dispatch(getSortedMangaList({ axiosData: resultManga.data }));
+      setFetchingSort(false);
+    } catch (err) {
+      console.log(err);
+    } 
+  };
+
+  const qwer = () => {
+    setSortedBy("-ratingRank");
+    setFetchingSort(true);
+  };
+  const qwer2 = () => {
+    setSortedBy("ratingRank");
+    setFetchingSort(true);
+  };
+
+  useEffect(() => {
+    if (fetchingSort) {
+      getSortedManga();
+    }
+  }, [fetchingSort]);
+
   return (
     <ThemeContext.Provider value={{ theme: myTheme, toggler: switchTheme }}>
       <Router>
         <Header />
+        <div>
+          <button onClick={qwer}>re rating</button>
+          <button onClick={qwer2}>rating</button>
+        </div>
         <Routes>
           <Route path="/anime/:id" element={<FullInfoAnime />} />
           <Route path="/manga/:id" element={<FullInfoManga />} />
@@ -115,3 +151,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
+

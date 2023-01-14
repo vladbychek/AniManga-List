@@ -5,18 +5,9 @@ import { ThreeCircles } from "react-loader-spinner";
 
 import { axiosData } from "../axios/api";
 import { getFullAnimeInfo } from "../redux/reducer/animeSlice/animeSlice";
-import {
-  FullAnimeInfoImgAndTitleWrapper,
-  FullAnimeNotSpan,
-  FullAnimeSpan,
-  FullAnimeTitleAndAboutWrapper,
-  FullInfoAnimeAbout,
-  FullInfoAnimeAll,
-  FullInfoAnimeImg,
-  FullInfoAnimeTitle,
-  LoaderrrAnime,
-  MoreInfoAnime,
-} from "./fullAnimeInfo.Styles";
+
+import { FullInfoAbout, FullInfoAll, FullInfoImg, FullInfoImgAndTitleWrapper, FullInfoTitle, FullNotSpan, FullSpan, FullTitleAndAboutWrapper, Loaderrr, MoreInfo } from "../common/fullInfoPage.Styles";
+import { useTheme } from "../../themeContext";
 
 export const FullInfoAnime = () => {
   const [loading, isLoading] = useState(true);
@@ -43,10 +34,12 @@ export const FullInfoAnime = () => {
   useEffect(() => {
     getFullAnimeInformation();
   }, []);
+  
+  const currentTheme = useTheme();
 
   return (
     <>
-      <LoaderrrAnime>
+      <Loaderrr>
         <ThreeCircles
           height="200"
           width="200"
@@ -54,54 +47,54 @@ export const FullInfoAnime = () => {
           visible={loading}
           ariaLabel="three-circles-rotating"
         />
-      </LoaderrrAnime>
+      </Loaderrr>
       {!loading && (
-        <FullInfoAnimeAll>
-          <FullAnimeInfoImgAndTitleWrapper>
-            <FullInfoAnimeImg
+        <FullInfoAll>
+          <FullInfoImgAndTitleWrapper>
+            <FullInfoImg
               src={FullInfoAnimeStore?.data.attributes.posterImage.original}
               alt=""
             />
-            <FullAnimeTitleAndAboutWrapper>
-              <FullInfoAnimeTitle>
+            <FullTitleAndAboutWrapper theme={currentTheme.theme} >
+              <FullInfoTitle>
                 {FullInfoAnimeStore?.data.attributes.canonicalTitle}
-              </FullInfoAnimeTitle>
-              <FullInfoAnimeAbout>
+              </FullInfoTitle>
+              <FullInfoAbout>
                 {FullInfoAnimeStore?.data.attributes.description}
-              </FullInfoAnimeAbout>
-            </FullAnimeTitleAndAboutWrapper>
-          </FullAnimeInfoImgAndTitleWrapper>
-          <MoreInfoAnime>
-            <FullAnimeNotSpan>
+              </FullInfoAbout>
+            </FullTitleAndAboutWrapper>
+          </FullInfoImgAndTitleWrapper>
+          <MoreInfo >
+            <FullNotSpan>
               Type<br></br>
-              <FullAnimeSpan>{FullInfoAnimeStore?.data.type}</FullAnimeSpan>
-            </FullAnimeNotSpan>
-            <FullAnimeNotSpan>
+              <FullSpan theme={currentTheme.theme}>{FullInfoAnimeStore?.data.type}</FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Release date<br></br>
-              <FullAnimeSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoAnimeStore?.data.attributes.startDate}
-              </FullAnimeSpan>
-            </FullAnimeNotSpan>
-            <FullAnimeNotSpan>
+              </FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Title status<br></br>
-              <FullAnimeSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoAnimeStore?.data.attributes.status}
-              </FullAnimeSpan>
-            </FullAnimeNotSpan>
-            <FullAnimeNotSpan>
+              </FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Age rating<br></br>
-              <FullAnimeSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoAnimeStore?.data.attributes.ageRating}
-              </FullAnimeSpan>
-            </FullAnimeNotSpan>
-            <FullAnimeNotSpan>
+              </FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Amount of episodes<br></br>
-              <FullAnimeSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoAnimeStore?.data.attributes.episodeCount}
-              </FullAnimeSpan>
-            </FullAnimeNotSpan>
-          </MoreInfoAnime>
-        </FullInfoAnimeAll>
+              </FullSpan>
+            </FullNotSpan>
+          </MoreInfo>
+        </FullInfoAll>
       )}
     </>
   );

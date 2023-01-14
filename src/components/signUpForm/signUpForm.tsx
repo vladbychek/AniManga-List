@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { SignUpWrapper, SignUpTitle, SignUpText, SignUpCard, SignUpInput, SignUpText2, SignUpButton } from "./signUpForm.Styles";
+import { useTheme } from "../../themeContext";
+import { FormWrapper, FormTitle, FormText, FormInput, FormText2, FormButton, FormCard } from "../common/form.Styles";
 
 
 export const SignUpForm = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [isValid, setIsValid] = useState(false)
-    // const [isErrorUsername, setIsErrorName] = useState<boolean>(false);
-	// const [isErrorPassword, setIsErrorPassword] = useState<boolean>(false);
+    const currentTheme = useTheme();
 
 
     const handleChangeUsername = (event: any) => {
@@ -32,30 +32,20 @@ export const SignUpForm = () => {
         } else {
             setIsValid(false)
         }
-
-        // if (username) {
-		// 	minLengthUsername ? setIsErrorName(false) : setIsErrorName(true);
-		// }
-
-		// if (password && passwordLetters) {
-		// 	passwordNumbers && passwordLetters
-		// 		? setIsErrorPassword(false)
-		// 		: setIsErrorPassword(true);
-		// }
     }, [username, password])
 
     return(
         <>
-            <SignUpWrapper>
-                <SignUpTitle>Sign Up</SignUpTitle>
-                <SignUpText>Enter your credentials</SignUpText>
-                <SignUpCard action="">
-                    <SignUpInput onChange={(event) => handleChangeUsername(event)} value={username} required type="text" placeholder="Username" />
-                    <SignUpInput onChange={(event) => handleChangePassword(event)} value={password} required type="text" placeholder="Password" />
-                    <SignUpText2>Already have account? <NavLink to={"/login"}>Login</NavLink></SignUpText2> 
-                    <SignUpButton disabled={!isValid}>Sign Up</SignUpButton>
-                </SignUpCard>
-            </SignUpWrapper>
+            <FormWrapper theme={currentTheme.theme}>
+                <FormTitle>Sign Up</FormTitle>
+                <FormText>Enter your credentials</FormText>
+                <FormCard>
+                    <FormInput onChange={(event) => handleChangeUsername(event)} value={username} required type="text" placeholder="Username" />
+                    <FormInput onChange={(event) => handleChangePassword(event)} value={password} required type="text" placeholder="Password" />
+                    <FormText2>Already have account? <NavLink to={"/login"}>Login</NavLink></FormText2> 
+                    <FormButton disabled={!isValid}>Sign Up</FormButton>
+                </FormCard>
+            </FormWrapper>
         </>
     )
 }

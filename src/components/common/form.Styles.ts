@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 
-export const LoginWrapper = styled.div`
+export const FormWrapper = styled.div`
     width: 400px;
     margin: 100px auto 0;
     padding: 50px 30px 60px;
     border-radius: 24px;
-    background: #ffffff;
+    background-color: ${({ theme }) => (theme === "light" ? "#FFA500" : "white")};
     text-align: center;
 `
 
-export const LoginCard = styled.form`
+export const FormCard = styled.form`
     width: 100%;
     margin: 0;
     display: flex;
@@ -19,16 +19,16 @@ export const LoginCard = styled.form`
 `
 
 
-export const LoginTitle = styled.h2`
+export const FormTitle = styled.h2`
     margin: 0 0 12px;
     font-size: 36px;
 `
 
-export const LoginText = styled.h3`
-    color: rgba(0, 0, 0, 0.38);
+export const FormText = styled.h3`
+    color: rgba(0, 0, 0, 0.75);
 `
 
-export const LoginInput = styled.input`
+export const FormInput = styled.input`
     font-weight: 600;
     height: 56px;
     border-radius: 4px;
@@ -36,13 +36,13 @@ export const LoginInput = styled.input`
     font-size: 16px;
     border: 2px solid #ebebeb;
 `
-export const LoginText2 = styled.div`
+export const FormText2 = styled.div`
     font-size: 16px;
     font-weight: 600;
     text-align: end ;
 `
 
-export const LoginButton = styled.button`
+export const FormButton = styled.button`
 width: 100%;
 border: 0;
 color: #f9f9f9;

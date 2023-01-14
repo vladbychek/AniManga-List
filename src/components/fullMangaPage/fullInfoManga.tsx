@@ -3,19 +3,9 @@ import { getFullMangaInfo } from "../redux/reducer/mangaSlice/mangaSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ThreeCircles } from "react-loader-spinner";
-import {
-  FullInfoMangaAbout,
-  FullInfoMangaAll,
-  FullInfoMangaImg,
-  FullInfoMangaTitle,
-  FullMangaInfoImgAndTitleWrapper,
-  FullMangaNotSpan,
-  FullMangaSpan,
-  FullMangaTitleAndAboutWrapper,
-  LoaderrrManga,
-  MoreInfoManga,
-} from "./fullMangaInfo.Styles";
 import { axiosData } from "../axios/api";
+import { Loaderrr, FullInfoAll, FullInfoImgAndTitleWrapper, FullInfoImg, FullTitleAndAboutWrapper, FullInfoTitle, FullInfoAbout, MoreInfo, FullSpan, FullNotSpan } from "../common/fullInfoPage.Styles";
+import { useTheme } from "../../themeContext";
 
 export const FullInfoManga = () => {
   const [loading, isLoading] = useState(true);
@@ -41,10 +31,11 @@ export const FullInfoManga = () => {
   useEffect(() => {
     getFullMangaInformation();
   }, []);
+  const currentTheme = useTheme();
 
   return (
     <>
-    <LoaderrrManga>
+    <Loaderrr>
         <ThreeCircles
         height="200"
         width="200"
@@ -52,58 +43,57 @@ export const FullInfoManga = () => {
         visible={loading}
         ariaLabel="three-circles-rotating"
       />
-      </LoaderrrManga>
+      </Loaderrr>
       {!loading && (
-        <FullInfoMangaAll>
-          <FullMangaInfoImgAndTitleWrapper>
-            <FullInfoMangaImg
+        <FullInfoAll>
+          <FullInfoImgAndTitleWrapper>
+            <FullInfoImg
               src={FullInfoMangaStore.data.attributes.posterImage.original}
-              alt=""
             />
-            <FullMangaTitleAndAboutWrapper>
-              <FullInfoMangaTitle>{`${FullInfoMangaStore.data.attributes.canonicalTitle}`}</FullInfoMangaTitle>
-              <FullInfoMangaAbout>{`${FullInfoMangaStore.data.attributes.description}`}</FullInfoMangaAbout>
-            </FullMangaTitleAndAboutWrapper>
-          </FullMangaInfoImgAndTitleWrapper>
-          <MoreInfoManga>
-            <FullMangaNotSpan>
+            <FullTitleAndAboutWrapper theme={currentTheme.theme}>
+              <FullInfoTitle>{FullInfoMangaStore.data.attributes.canonicalTitle}</FullInfoTitle>
+              <FullInfoAbout>{FullInfoMangaStore.data.attributes.description}</FullInfoAbout>
+            </FullTitleAndAboutWrapper>
+          </FullInfoImgAndTitleWrapper>
+          <MoreInfo >
+            <FullNotSpan>
               Type<br></br>
-              <FullMangaSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoMangaStore.data.attributes.subtype}
-              </FullMangaSpan>
-            </FullMangaNotSpan>
-            <FullMangaNotSpan>
+              </FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Release date<br></br>
-              <FullMangaSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoMangaStore.data.attributes.startDate}
-              </FullMangaSpan>
-            </FullMangaNotSpan>
-            <FullMangaNotSpan>
+              </FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Title status<br></br>
-              <FullMangaSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoMangaStore.data.attributes.status}
-              </FullMangaSpan>
-            </FullMangaNotSpan>
-            <FullMangaNotSpan>
+              </FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Published in<br></br>
-              <FullMangaSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoMangaStore.data.attributes.serialization}
-              </FullMangaSpan>
-            </FullMangaNotSpan>
-            <FullMangaNotSpan>
+              </FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Amount of volumes<br></br>
-              <FullMangaSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoMangaStore.data.attributes.volumeCount}
-              </FullMangaSpan>
-            </FullMangaNotSpan>
-            <FullMangaNotSpan>
+              </FullSpan>
+            </FullNotSpan>
+            <FullNotSpan>
               Amount of chapters<br></br>
-              <FullMangaSpan>
+              <FullSpan theme={currentTheme.theme}>
                 {FullInfoMangaStore.data.attributes.chapterCount}
-              </FullMangaSpan>
-            </FullMangaNotSpan>
-          </MoreInfoManga>
-        </FullInfoMangaAll>
+              </FullSpan>
+            </FullNotSpan>
+          </MoreInfo>
+        </FullInfoAll>
       )}
     </>
   );

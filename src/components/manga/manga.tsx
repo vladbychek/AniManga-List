@@ -1,27 +1,26 @@
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useTheme } from "../../themeContext";
-import { MaterialUISwitch } from "../switch/switch";
-import { AllManga, MangaLink, MangaTitle, MangaWrapper } from "./manta.Styles";
+import { AllMainPages, MainPagesWrapper, MainPagesLink, MainPagesTitle, MainPageContent } from "../common/mainPages.Styles";
+
 
 export const Manga = () => {
   const MangaStore = useSelector((state: any) => state.manga.mangaArr);
-  const currentTheme = useTheme();
 
   return (
-    <>
-  <MaterialUISwitch onClick={currentTheme.toggler}/>
-      <AllManga>
+    <MainPageContent>
+      <AllMainPages>
         {MangaStore?.map((manga: any) => (
           <Link to={`${manga.id}`}>
-            <MangaWrapper>
-              <MangaLink img={manga.attributes.posterImage.original}>
-                <MangaTitle>{manga.attributes.canonicalTitle}</MangaTitle>
-              </MangaLink>
-            </MangaWrapper>
+            <MainPagesWrapper>
+              <MainPagesLink img={manga.attributes.posterImage.original}>
+                <MainPagesTitle>{manga.attributes.canonicalTitle}</MainPagesTitle>
+              </MainPagesLink>
+            </MainPagesWrapper>
           </Link>
         ))}
-      </AllManga>
-    </>
+      </AllMainPages>
+    </MainPageContent>
   );
 };
