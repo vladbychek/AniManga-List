@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   mangaArr: [],
   fullMangaInfoArr: [],
+  mangaCurrPage: 0,
+  mangaCurrSort: "",
 };
 
 const mangaSlice = createSlice({
@@ -10,18 +12,40 @@ const mangaSlice = createSlice({
   initialState,
   reducers: {
     addManga: (state: any, action) => {
-      action.payload.axiosData.data.map((item: any) => state.mangaArr.push(item));
-      console.log('1', state.mangaArr)
+      state.mangaArr = action.payload.axiosData.data;
     },
     getFullMangaInfo: (state: any, action) => {
-      state.fullMangaInfoArr = action.payload.mangaData
+      state.fullMangaInfoArr = action.payload.mangaData;
     },
-    getSortedMangaList: (state: any, action) => {
-      state.mangaArr = action.payload.axiosData.data;
-      console.log('2', state.mangaArr)
-    }
+    getNextMangaPage: (state: any) => {
+      state.mangaCurrPage = state.mangaCurrPage + 20;
+    },
+    getPrevMangaPage: (state: any) => {
+      state.mangaCurrPage = state.mangaCurrPage - 20;
+    },
+    sortMangaByDate: (state: any) => {
+      state.mangaCurrSort = "startDate";
+    },
+    sortMangaByDateBack: (state: any) => {
+      state.mangaCurrSort = "-startDate";
+    },
+    sortMangaByRank: (state: any) => {
+      state.mangaCurrSort = "averageRating";
+    },
+    sortMangaByRankBack: (state: any) => {
+      state.mangaCurrSort = "-averageRating";
+    },
   },
 });
 
-export const { addManga, getFullMangaInfo, getSortedMangaList } = mangaSlice.actions;
+export const {
+  addManga,
+  getFullMangaInfo,
+  getNextMangaPage,
+  getPrevMangaPage,
+  sortMangaByDate,
+  sortMangaByDateBack,
+  sortMangaByRank,
+  sortMangaByRankBack,
+} = mangaSlice.actions;
 export const mangaReducer = mangaSlice.reducer;

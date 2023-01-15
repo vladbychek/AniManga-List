@@ -43,7 +43,7 @@ export const FullInfoAnime = () => {
         <ThreeCircles
           height="200"
           width="200"
-          color="#ff8c00"
+          color={currentTheme.theme === "light" ? "#ff8c00" : "white"}
           visible={loading}
           ariaLabel="three-circles-rotating"
         />

@@ -20,7 +20,6 @@ export const FullInfoManga = () => {
     try {
       isLoading(true);
       const resultFullInfoManga = await axiosData.get(`/manga/${id}`);
-      console.log(resultFullInfoManga.data.data)
       isLoading(false);
       dispatch(getFullMangaInfo({ mangaData: resultFullInfoManga.data }));
     } catch (err) {
@@ -39,7 +38,7 @@ export const FullInfoManga = () => {
         <ThreeCircles
         height="200"
         width="200"
-        color="#ff8c00"
+        color={currentTheme.theme === "light" ? "#ff8c00" : "white"}
         visible={loading}
         ariaLabel="three-circles-rotating"
       />
@@ -48,7 +47,7 @@ export const FullInfoManga = () => {
         <FullInfoAll>
           <FullInfoImgAndTitleWrapper>
             <FullInfoImg
-              src={FullInfoMangaStore.data.attributes.posterImage.original}
+              src={FullInfoMangaStore.data.attributes.posterImage?.original}
             />
             <FullTitleAndAboutWrapper theme={currentTheme.theme}>
               <FullInfoTitle>{FullInfoMangaStore.data.attributes.canonicalTitle}</FullInfoTitle>
