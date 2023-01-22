@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useTheme } from "../../themeContext";
 import { MaterialUISwitch } from "../switch/switch";
-import { HeaderContent, HeaderImg, HeaderLinks, HeaderWrapper } from "./header.Styles";
-// import Logo from "../img/logo.png";
+import {
+  HeaderContent,
+  HeaderElement,
+  HeaderImg,
+  HeaderLinks,
+  HeaderWrapper,
+} from "./header.Styles";
 const HeaderLogo = require("../img/logo.png");
 
 export const Header = () => {
@@ -12,19 +17,19 @@ export const Header = () => {
     <>
       <HeaderWrapper theme={currentTheme.theme}>
         <HeaderContent>
-          <HeaderImg src={HeaderLogo} alt="" />
+          <NavLink to={"/"}> <HeaderImg src={HeaderLogo} alt="" /></NavLink>
           <HeaderLinks>
-            <NavLink to={"/manga"}>
-              <div>Manga</div>
+            <NavLink style={{ textDecoration: "none" }} to={"/manga"}>
+              <HeaderElement>Manga</HeaderElement>
             </NavLink>
-            <NavLink to={"/anime"}>
-              <div>Anime</div>
+            <NavLink style={{ textDecoration: "none" }} to={"/anime"}>
+              <HeaderElement>Anime</HeaderElement>
             </NavLink>
             <NavLink to={"/login"}>
-              <div>Login</div>
+              <HeaderElement>Login</HeaderElement>
             </NavLink>
             <NavLink to={"/signUp"}>
-              <div>SignUp</div>
+              <HeaderElement>SignUp</HeaderElement>
             </NavLink>
           </HeaderLinks>
           <MaterialUISwitch onClick={currentTheme.toggler} />

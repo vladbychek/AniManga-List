@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   animeArr: [],
   fullAnimeInfoArr: [],
-  animeCurrPage: 0,
   animeCurrSort: "",
+  currAnimePage: 0
 };
 
 const animeSlice = createSlice({
@@ -16,12 +16,6 @@ const animeSlice = createSlice({
     },
     getFullAnimeInfo: (state: any, action) => {
       state.fullAnimeInfoArr = action.payload.animeData;
-    },
-    getNextAnimePage: (state: any) => {
-      state.animeCurrPage = state.animeCurrPage + 20;
-    },
-    getPrevAnimePage: (state: any) => {
-      state.animeCurrPage = state.animeCurrPage - 20;
     },
     sortAnimeByDate: (state: any) => {
       state.animeCurrSort = "startDate";
@@ -35,17 +29,23 @@ const animeSlice = createSlice({
     sortAnimeByRankBack: (state: any) => {
       state.animeCurrSort = "-averageRating";
     },
+    getNextAnimePage: (state: any) => {
+      state.currAnimePage = state.currAnimePage + 20;
+    },
+    getPrevAnimePage: (state: any) => {
+      state.currAnimePage = state.currAnimePage - 20;
+    },
   },
 });
 
 export const {
   addAnime,
   getFullAnimeInfo,
-  getNextAnimePage,
-  getPrevAnimePage,
   sortAnimeByDate,
   sortAnimeByDateBack,
   sortAnimeByRank,
   sortAnimeByRankBack,
+  getPrevAnimePage,
+  getNextAnimePage
 } = animeSlice.actions;
 export const animeReducer = animeSlice.reducer;

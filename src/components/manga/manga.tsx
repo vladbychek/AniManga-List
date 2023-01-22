@@ -11,6 +11,11 @@ import {
   MainPagesLink,
   MainPagesTitle,
   MainPageContent,
+  AllSortBtns,
+  SortBtn,
+  SortTypeBtns,
+  AllPaginationBtns,
+  PaginationBtn,
 } from "../common/mainPages.Styles";
 import {
   addManga,
@@ -25,7 +30,7 @@ import {
 export const Manga = () => {
   const MangaStore = useSelector((state: any) => state.manga.mangaArr);
   const CurrentMangaPage = useSelector(
-    (state: any) => state.manga.mangaCurrPage
+    (state: any) => state.manga.currMangaPage
   );
   const CurrentMangaSort = useSelector(
     (state: any) => state.manga.mangaCurrSort
@@ -43,6 +48,7 @@ export const Manga = () => {
         `/manga?page%5Blimit%5D=20&page%5Boffset%5D=${CurrentMangaPage}&sort=${CurrentMangaSort}`
       );
       isLoading(false);
+      setFetchingSort(false);
       dispatch(addManga({ axiosData: resultManga.data }));
     } catch (err) {
       console.log(err);
@@ -53,22 +59,24 @@ export const Manga = () => {
     getManga();
   }, [CurrentMangaPage, fetchingSort]);
 
-  const SortByDicreasingRank = () => {
+  const SortByIncreasingDate = () => {
     dispatch(sortMangaByDate());
     setFetchingSort(true);
   };
-  const SortByIncreasingRank = () => {
+  const SortByDicreasingDate = () => {
     dispatch(sortMangaByDateBack());
     setFetchingSort(true);
   };
-  const SortByDicreasingTitleName = () => {
+  const SortByIncreasingRank = () => {
     dispatch(sortMangaByRank());
     setFetchingSort(true);
   };
-  const SortByIncreasingTitleName = () => {
+  const SortByDicreasingRank = () => {
     dispatch(sortMangaByRankBack());
     setFetchingSort(true);
   };
+
+  const currentTheme = useTheme();
 
   const prev = () => {
     dispatch(getPrevMangaPage());
@@ -77,8 +85,6 @@ export const Manga = () => {
   const next = () => {
     dispatch(getNextMangaPage());
   };
-  const currentTheme = useTheme();
-
   return (
     <>
       <Loaderrr>
@@ -92,20 +98,20 @@ export const Manga = () => {
       </Loaderrr>
       {!loading && (
         <>
-          <div>
-            <button onClick={SortByDicreasingRank}>re rating</button>
-            <button onClick={SortByIncreasingRank}>rating</button>
-            <button onClick={SortByDicreasingTitleName}>re name</button>
-            <button onClick={SortByIncreasingTitleName}>name</button>
-          </div>
-          <div>
-            <button onClick={prev}>prev</button>
-            <button onClick={next}>next</button>
-          </div>
           <MainPageContent>
+            <AllSortBtns>
+              <SortTypeBtns>
+                <SortBtn onClick={SortByDicreasingRank}>Rank 🠕</SortBtn>
+                <SortBtn onClick={SortByIncreasingRank}>Rank 🠗</SortBtn>
+              </SortTypeBtns>
+              <SortTypeBtns>
+                <SortBtn onClick={SortByIncreasingDate}>Date 🠕</SortBtn>
+                <SortBtn onClick={SortByDicreasingDate}>Date 🠗</SortBtn>
+              </SortTypeBtns>
+            </AllSortBtns>
             <AllMainPages>
               {MangaStore?.map((manga: any) => (
-                <Link to={`${manga.id}`}>
+                <Link key={manga.id} to={`${manga.id}`}>
                   <MainPagesWrapper>
                     <MainPagesLink img={manga.attributes.posterImage.original}>
                       <MainPagesTitle>
@@ -116,6 +122,10 @@ export const Manga = () => {
                 </Link>
               ))}
             </AllMainPages>
+            <AllPaginationBtns>
+              <PaginationBtn onClick={prev}>prev</PaginationBtn>
+              <PaginationBtn onClick={next}>next</PaginationBtn>
+            </AllPaginationBtns>
           </MainPageContent>
         </>
       )}

@@ -18,7 +18,8 @@ export const HeaderContent = styled.div`
 `;
 
 export const HeaderImg = styled.img`
-  width: 145px;
+  width: 130px;
+  padding-top: 2px;
 `;
 
 export const HeaderLinks = styled.div`
@@ -27,3 +28,12 @@ export const HeaderLinks = styled.div`
   justify-content: space-evenly;
 `;
 
+export const HeaderElement = styled.div`
+  color: black;
+  &:hover{
+    text-shadow: red 2px 5px;
+  };
+    &:active{
+      text-shadow: none;
+  };
+`

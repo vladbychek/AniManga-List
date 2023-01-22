@@ -11,6 +11,11 @@ import {
   MainPagesLink,
   MainPagesTitle,
   MainPageContent,
+  AllSortBtns,
+  SortBtn,
+  SortTypeBtns,
+  AllPaginationBtns,
+  PaginationBtn,
 } from "../common/mainPages.Styles";
 import {
   addAnime,
@@ -24,9 +29,11 @@ import {
 
 export const Anime = () => {
   const AnimeStore = useSelector((state: any) => state.anime.animeArr);
+
   const CurrentAnimePage = useSelector(
-    (state: any) => state.anime.animeCurrPage
+    (state: any) => state.anime.currAnimePage
   );
+
   const CurrentAnimeSort = useSelector(
     (state: any) => state.anime.animeCurrSort
   );
@@ -49,19 +56,19 @@ export const Anime = () => {
     }
   };
 
-  const SortByDicreasingRank = () => {
+  const SortByIncreasingDate = () => {
     dispatch(sortAnimeByDate());
     setFetchingSort(true);
   };
-  const SortByIncreasingRank = () => {
+  const SortByDicreasingDate = () => {
     dispatch(sortAnimeByDateBack());
     setFetchingSort(true);
   };
-  const SortByDicreasingTitleName = () => {
+  const SortByIncreasingRank = () => {
     dispatch(sortAnimeByRank());
     setFetchingSort(true);
   };
-  const SortByIncreasingTitleName = () => {
+  const SortByDicreasingRank = () => {
     dispatch(sortAnimeByRankBack());
     setFetchingSort(true);
   };
@@ -69,7 +76,6 @@ export const Anime = () => {
   useEffect(() => {
     getAnime();
   }, [CurrentAnimePage, fetchingSort]);
-
   const prev = () => {
     dispatch(getPrevAnimePage());
   };
@@ -92,20 +98,20 @@ export const Anime = () => {
       </Loaderrr>
       {!loading && (
         <>
-          <div>
-            <button onClick={SortByDicreasingRank}>re rating</button>
-            <button onClick={SortByIncreasingRank}>rating</button>
-            <button onClick={SortByDicreasingTitleName}>re name</button>
-            <button onClick={SortByIncreasingTitleName}>name</button>
-          </div>
-          <div>
-            <button onClick={prev}>prev</button>
-            <button onClick={next}>next</button>
-          </div>
+          <AllSortBtns>
+            <SortTypeBtns>
+              <SortBtn onClick={SortByDicreasingRank}>Rank 🠕</SortBtn>
+              <SortBtn onClick={SortByIncreasingRank}>Rank 🠗</SortBtn>
+            </SortTypeBtns>
+            <SortTypeBtns>
+              <SortBtn onClick={SortByIncreasingDate}>Date 🠕</SortBtn>
+              <SortBtn onClick={SortByDicreasingDate}>Date 🠗</SortBtn>
+            </SortTypeBtns>
+          </AllSortBtns>
           <MainPageContent>
             <AllMainPages>
               {AnimeStore?.map((anime: any) => (
-                <Link to={`${anime.id}`}>
+                <Link key={anime.id} to={`${anime.id}`}>
                   <MainPagesWrapper>
                     <MainPagesLink img={anime.attributes.posterImage?.original}>
                       <MainPagesTitle>
@@ -116,6 +122,10 @@ export const Anime = () => {
                 </Link>
               ))}
             </AllMainPages>
+            <AllPaginationBtns>
+              <PaginationBtn onClick={prev}>prev</PaginationBtn>
+              <PaginationBtn onClick={next}>next</PaginationBtn>
+            </AllPaginationBtns>
           </MainPageContent>
         </>
       )}

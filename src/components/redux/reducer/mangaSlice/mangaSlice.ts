@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   mangaArr: [],
   fullMangaInfoArr: [],
-  mangaCurrPage: 0,
   mangaCurrSort: "",
+  currMangaPage: 0
 };
 
 const mangaSlice = createSlice({
@@ -16,12 +16,6 @@ const mangaSlice = createSlice({
     },
     getFullMangaInfo: (state: any, action) => {
       state.fullMangaInfoArr = action.payload.mangaData;
-    },
-    getNextMangaPage: (state: any) => {
-      state.mangaCurrPage = state.mangaCurrPage + 20;
-    },
-    getPrevMangaPage: (state: any) => {
-      state.mangaCurrPage = state.mangaCurrPage - 20;
     },
     sortMangaByDate: (state: any) => {
       state.mangaCurrSort = "startDate";
@@ -35,17 +29,23 @@ const mangaSlice = createSlice({
     sortMangaByRankBack: (state: any) => {
       state.mangaCurrSort = "-averageRating";
     },
+    getNextMangaPage: (state: any) => {
+      state.currMangaPage = state.currMangaPage + 20;
+    },
+    getPrevMangaPage: (state: any) => {
+      state.currMangaPage = state.currMangaPage - 20;
+    },
   },
 });
 
 export const {
   addManga,
   getFullMangaInfo,
-  getNextMangaPage,
-  getPrevMangaPage,
   sortMangaByDate,
   sortMangaByDateBack,
   sortMangaByRank,
   sortMangaByRankBack,
+  getNextMangaPage,
+  getPrevMangaPage
 } = mangaSlice.actions;
 export const mangaReducer = mangaSlice.reducer;
