@@ -19,7 +19,7 @@ export const HeaderContent = styled.div`
 
 export const HeaderImg = styled.img`
   width: 130px;
-  padding-top: 2px;
+  padding-top: 10px;
 `;
 
 export const HeaderLinks = styled.div`
@@ -29,7 +29,7 @@ export const HeaderLinks = styled.div`
 `;
 
 export const HeaderElement = styled.div`
-  color: black;
+  color: ${({ theme }) => (theme === "light" ? "black" : "white")};
   &:hover{
     text-shadow: red 2px 5px;
   };

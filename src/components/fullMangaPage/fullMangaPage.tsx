@@ -1,51 +1,49 @@
 import { useDispatch, useSelector } from "react-redux";
+import { getFullMangaInfo } from "../redux/reducer/mangaSlice/mangaSlice";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ThreeCircles } from "react-loader-spinner";
-
 import { axiosData } from "../axios/api";
-import { getFullAnimeInfo } from "../redux/reducer/animeSlice/animeSlice";
-
 import {
-  FullInfoAbout,
   FullInfoAll,
-  FullInfoImg,
   FullInfoImgAndTitleWrapper,
-  FullInfoTitle,
+  FullInfoImg,
   FullTitleAndAboutWrapper,
+  FullInfoTitle,
+  FullInfoAbout,
   RatingIcon,
   RatingWrapper,
 } from "../common/fullInfoPage.Styles";
 import { useTheme } from "../../themeContext";
 import { Loader } from "../common/loader.Styles";
-import { MoreInfo } from "./fullAnimePageMoreInfo/fullAnimePageMoreInfo";
-import { AppDispatch, RootState, } from "../redux/store";
+import { MoreInfo } from "./fullMangaPageMoreInfo/fullMangaPageMoreInfo";
+import { AppDispatch, RootState } from "../redux/store";
 
 const RatingLogo = require("../img/RatingLogo.png");
-const loda = require("lodash");
 
-export const FullInfoAnime = () => {
-  const FullInfoAnimeStore = useSelector(
-    (state: RootState) => state.anime.fullAnimeInfoArr
+
+export const FullInfoManga = () => {
+  const FullInfoMangaStore = useSelector(
+    (state: RootState) => state.manga.fullMangaInfoArr
   );
-
   const [loading, isLoading] = useState<boolean>(true);
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const currentTheme = useTheme();
 
-  const getFullAnimeInformation = async () => {
+  const getFullMangaInformation = async () => {
     try {
       isLoading(true);
-      const resultFullInfoAnime = await axiosData.get(`/anime/${id}`);
+      const resultFullInfoManga = await axiosData.get(`/manga/${id}`);
       isLoading(false);
-      dispatch(getFullAnimeInfo({ fullInfo: resultFullInfoAnime.data.data }));
+      dispatch(getFullMangaInfo({ fullInfo: resultFullInfoManga.data.data }));
     } catch (err) {
       console.log(err);
     }
   };
+
   useEffect(() => {
-    getFullAnimeInformation();
+    getFullMangaInformation();
   }, []);
 
   return (
@@ -63,17 +61,17 @@ export const FullInfoAnime = () => {
         <FullInfoAll>
           <FullInfoImgAndTitleWrapper>
             <FullInfoImg
-              src={FullInfoAnimeStore.attributes?.posterImage.original}
-              alt=""
+              src={FullInfoMangaStore.attributes?.posterImage.original}
             />
             <FullTitleAndAboutWrapper theme={currentTheme.theme}>
-              <div><RatingWrapper>{!FullInfoAnimeStore.attributes?.averageRating ? "no rating" : `${FullInfoAnimeStore.attributes.averageRating}`} <RatingIcon src={RatingLogo} alt="" /></RatingWrapper>
+              <div>
+                <RatingWrapper>{!FullInfoMangaStore.attributes?.averageRating ? "no rating" : `${FullInfoMangaStore.attributes.averageRating}`} <RatingIcon src={RatingLogo} alt="" /></RatingWrapper>
               <FullInfoTitle>
-                {FullInfoAnimeStore.attributes?.canonicalTitle}
+                {FullInfoMangaStore.attributes?.canonicalTitle}
               </FullInfoTitle>
               </div>
               <FullInfoAbout>
-                {FullInfoAnimeStore.attributes?.description}
+                {FullInfoMangaStore.attributes?.description}
               </FullInfoAbout>
             </FullTitleAndAboutWrapper>
           </FullInfoImgAndTitleWrapper>

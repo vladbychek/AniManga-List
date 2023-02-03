@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
 import { ThreeCircles } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { useTheme } from "../../themeContext";
 import { axiosData } from "../axios/api";
-import { Loaderrr } from "../common/fullInfoPage.Styles";
 import {
-  AllMainPages,
-  MainPagesWrapper,
-  MainPagesLink,
-  MainPagesTitle,
-  MainPageContent,
   AllSortBtns,
   SortBtn,
   SortTypeBtns,
   AllPaginationBtns,
   PaginationBtn,
-} from "../common/mainPages.Styles";
+  AllListsPages,
+  ListsPageContent,
+} from "../common/ListsPages.Styles";
+import { Loader } from "../common/loader.Styles";
 import {
   addAnime,
   getNextAnimePage,
@@ -26,21 +22,21 @@ import {
   sortAnimeByRank,
   sortAnimeByRankBack,
 } from "../redux/reducer/animeSlice/animeSlice";
+import { AppDispatch, RootState} from "../redux/store";
+import { AnimeItem } from "./animeItem/animeItem";
+
 
 export const Anime = () => {
-  const AnimeStore = useSelector((state: any) => state.anime.animeArr);
+  const CurrentAnimePage = useSelector((state: RootState) => state.anime.currAnimePage);
+  const CurrentAnimeSort = useSelector((state: RootState) => state.anime.animeCurrSort);
+  
+  const [fetchingSort, setFetchingSort] = useState<boolean>(true);
+  const [loading, isLoading] = useState<boolean>(true);
+  const [disablePrevBtn, setDisablePrevBtn] = useState<boolean>(false);
+  const [disableNextBtn, setDisableNextBtn] = useState<boolean>(false);
 
-  const CurrentAnimePage = useSelector(
-    (state: any) => state.anime.currAnimePage
-  );
-
-  const CurrentAnimeSort = useSelector(
-    (state: any) => state.anime.animeCurrSort
-  );
-  const [fetchingSort, setFetchingSort] = useState(true);
-  const [loading, isLoading] = useState(true);
-
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const currentTheme = useTheme();
 
   const getAnime = async () => {
     try {
@@ -49,12 +45,17 @@ export const Anime = () => {
         `/anime?page%5Blimit%5D=20&page%5Boffset%5D=${CurrentAnimePage}&sort=${CurrentAnimeSort}`
       );
       isLoading(false);
-      dispatch(addAnime({ axiosData: resultAnime.data }));
+      dispatch(addAnime({ newArr: resultAnime.data.data }));
       setFetchingSort(false);
+      disableBtns();
     } catch (err) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    getAnime();
+  }, [CurrentAnimePage, fetchingSort]);
 
   const SortByIncreasingDate = () => {
     dispatch(sortAnimeByDate());
@@ -73,9 +74,6 @@ export const Anime = () => {
     setFetchingSort(true);
   };
 
-  useEffect(() => {
-    getAnime();
-  }, [CurrentAnimePage, fetchingSort]);
   const prev = () => {
     dispatch(getPrevAnimePage());
   };
@@ -83,11 +81,15 @@ export const Anime = () => {
   const next = () => {
     dispatch(getNextAnimePage());
   };
-  const currentTheme = useTheme();
+
+  const disableBtns = () => {
+    CurrentAnimePage === 0 ? setDisablePrevBtn(true) : setDisablePrevBtn(false)
+    CurrentAnimePage === 53300 ? setDisableNextBtn(true) : setDisableNextBtn(false)
+  }
 
   return (
     <>
-      <Loaderrr>
+      <Loader>
         <ThreeCircles
           height="200"
           width="200"
@@ -95,38 +97,28 @@ export const Anime = () => {
           visible={loading}
           ariaLabel="three-circles-rotating"
         />
-      </Loaderrr>
+      </Loader>
       {!loading && (
         <>
+        <ListsPageContent>
           <AllSortBtns>
             <SortTypeBtns>
-              <SortBtn onClick={SortByDicreasingRank}>Rank 🠕</SortBtn>
-              <SortBtn onClick={SortByIncreasingRank}>Rank 🠗</SortBtn>
+              <SortBtn theme={currentTheme.theme} title="sort by rank" onClick={SortByDicreasingRank}>Rank 🠕</SortBtn>
+              <SortBtn theme={currentTheme.theme} title="sort by rank" onClick={SortByIncreasingRank}>Rank 🠗</SortBtn>
             </SortTypeBtns>
             <SortTypeBtns>
-              <SortBtn onClick={SortByIncreasingDate}>Date 🠕</SortBtn>
-              <SortBtn onClick={SortByDicreasingDate}>Date 🠗</SortBtn>
+              <SortBtn theme={currentTheme.theme} title="sort by date" onClick={SortByIncreasingDate}>Date 🠕</SortBtn>
+              <SortBtn theme={currentTheme.theme} title="sort by date" onClick={SortByDicreasingDate}>Date 🠗</SortBtn>
             </SortTypeBtns>
           </AllSortBtns>
-          <MainPageContent>
-            <AllMainPages>
-              {AnimeStore?.map((anime: any) => (
-                <Link key={anime.id} to={`${anime.id}`}>
-                  <MainPagesWrapper>
-                    <MainPagesLink img={anime.attributes.posterImage?.original}>
-                      <MainPagesTitle>
-                        {anime.attributes.canonicalTitle}
-                      </MainPagesTitle>
-                    </MainPagesLink>
-                  </MainPagesWrapper>
-                </Link>
-              ))}
-            </AllMainPages>
+            <AllListsPages>
+              <AnimeItem/>
+            </AllListsPages>
             <AllPaginationBtns>
-              <PaginationBtn onClick={prev}>prev</PaginationBtn>
-              <PaginationBtn onClick={next}>next</PaginationBtn>
+              <PaginationBtn disabled={disablePrevBtn} theme={currentTheme.theme} title="previous page" onClick={prev}>prev</PaginationBtn>
+              <PaginationBtn disabled={disableNextBtn} theme={currentTheme.theme} title="next page" onClick={next}>next</PaginationBtn>
             </AllPaginationBtns>
-          </MainPageContent>
+        </ListsPageContent>
         </>
       )}
     </>

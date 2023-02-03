@@ -17,13 +17,18 @@ export const Header = () => {
     <>
       <HeaderWrapper theme={currentTheme.theme}>
         <HeaderContent>
-          <NavLink to={"/"}> <HeaderImg src={HeaderLogo} alt="" /></NavLink>
+          <NavLink to={"/"}>
+            <HeaderImg title="main page" src={HeaderLogo} alt="logo" />
+          </NavLink>
           <HeaderLinks>
             <NavLink style={{ textDecoration: "none" }} to={"/manga"}>
-              <HeaderElement>Manga</HeaderElement>
+              <HeaderElement theme={currentTheme.theme}>Manga</HeaderElement>
             </NavLink>
             <NavLink style={{ textDecoration: "none" }} to={"/anime"}>
-              <HeaderElement>Anime</HeaderElement>
+              <HeaderElement theme={currentTheme.theme}>Anime</HeaderElement>
+            </NavLink>
+            <NavLink style={{ textDecoration: "none" }} to={"/favorite"}>
+              <HeaderElement theme={currentTheme.theme}>Favorite</HeaderElement>
             </NavLink>
             <NavLink to={"/login"}>
               <HeaderElement>Login</HeaderElement>

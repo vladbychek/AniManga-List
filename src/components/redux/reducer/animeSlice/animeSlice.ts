@@ -1,39 +1,91 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AnimeStateType, AnimeNewArrType, AnimeType, AnimeFullInfoType, AnimeMainPageType } from "./anime.types";
 
-const initialState = {
+
+
+const initialState: AnimeStateType = {
   animeArr: [],
-  fullAnimeInfoArr: [],
+  fullAnimeInfoArr: {},
   animeCurrSort: "",
-  currAnimePage: 0
+  currAnimePage: 0,
+  mainPageAnimeArr: [],
+  favoriteAnimeArr: [],
 };
+
+const loda = require("lodash");
 
 const animeSlice = createSlice({
   name: "anime",
   initialState,
   reducers: {
-    addAnime: (state: any, action) => {
-      state.animeArr = action.payload.axiosData.data;
+    addAnime: (state, action: PayloadAction<AnimeNewArrType>) => {
+      state.animeArr = action.payload.newArr.map((item: AnimeType) =>
+        loda.pick(item, [
+          "id",
+          "type",
+          "attributes.description",
+          "attributes.canonicalTitle",
+          "attributes.averageRating",
+          "attributes.startDate",
+          "attributes.ageRating",
+          "attributes.subtype",
+          "attributes.status",
+          "attributes.posterImage.original",
+          "attributes.episodeCount",
+        ])
+      );
     },
-    getFullAnimeInfo: (state: any, action) => {
-      state.fullAnimeInfoArr = action.payload.animeData;
+    getFullAnimeInfo: (state, action: PayloadAction<AnimeFullInfoType>) => {
+      state.fullAnimeInfoArr =
+      loda.pick(action.payload.fullInfo, [
+        "id",
+        "type",
+        "attributes.description",
+        "attributes.canonicalTitle",
+        "attributes.averageRating",
+        "attributes.startDate",
+        "attributes.ageRating",
+        "attributes.subtype",
+        "attributes.status",
+        "attributes.posterImage.original",
+        "attributes.episodeCount",
+      ]
+    );
     },
-    sortAnimeByDate: (state: any) => {
+    sortAnimeByDate: (state) => {
       state.animeCurrSort = "startDate";
     },
-    sortAnimeByDateBack: (state: any) => {
+    sortAnimeByDateBack: (state) => {
       state.animeCurrSort = "-startDate";
     },
-    sortAnimeByRank: (state: any) => {
+    sortAnimeByRank: (state) => {
       state.animeCurrSort = "averageRating";
     },
-    sortAnimeByRankBack: (state: any) => {
+    sortAnimeByRankBack: (state) => {
       state.animeCurrSort = "-averageRating";
     },
-    getNextAnimePage: (state: any) => {
+    getNextAnimePage: (state) => {
       state.currAnimePage = state.currAnimePage + 20;
     },
-    getPrevAnimePage: (state: any) => {
+    getPrevAnimePage: (state) => {
       state.currAnimePage = state.currAnimePage - 20;
+    },
+    addMainPageAnime: (state, action: PayloadAction<AnimeMainPageType>) => {
+      state.mainPageAnimeArr = action.payload.mainPageArr.map((item: AnimeType) =>
+      loda.pick(item, [
+        "id",
+        "type",
+        "attributes.description",
+        "attributes.canonicalTitle",
+        "attributes.averageRating",
+        "attributes.startDate",
+        "attributes.ageRating",
+        "attributes.subtype",
+        "attributes.status",
+        "attributes.posterImage.original",
+        "attributes.episodeCount",
+      ])
+    );
     },
   },
 });
@@ -46,6 +98,7 @@ export const {
   sortAnimeByRank,
   sortAnimeByRankBack,
   getPrevAnimePage,
-  getNextAnimePage
+  getNextAnimePage,
+  addMainPageAnime,
 } = animeSlice.actions;
 export const animeReducer = animeSlice.reducer;

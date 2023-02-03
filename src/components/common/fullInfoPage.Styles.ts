@@ -17,14 +17,6 @@ export const FullInfoAll = styled.div`
   width: 1170px;
 `;
 
-export const MoreInfo = styled.div`
-  border-radius: 5px;
-  width: 279.5px;
-  margin-top: 15px;
-  font-family: "Poppins", sans-serif;
-  color: ${({ theme }) => (theme === "light" ? "black" : "white")};
-`;
-
 export const FullInfoImg = styled.img`
   width: 300px;
   height: 400px;
@@ -40,16 +32,11 @@ export const FullTitleAndAboutWrapper = styled.div<{theme: string}>`
   color:  ${({ theme }) => (theme === "light" ? "black" : "white")};
 `;
 
-export const FullNotSpan = styled.div`
-  color: #808080;
-  padding-bottom: 5px;
-`;
+export const RatingIcon = styled.img`
+  width: 20px;
+`
 
-export const FullSpan = styled.div`
-  color: ${({ theme }) => (theme === "light" ? "black" : "white")};
-`;
-
-export const Loaderrr = styled.div`
+export const RatingWrapper = styled.div`
   display: flex;
-  justify-content: center;
-`;
+  flex-direction: row-reverse;
+`
