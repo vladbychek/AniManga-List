@@ -87,6 +87,12 @@ const animeSlice = createSlice({
       ])
     );
     },
+    addAnimeToFavorite: (state: any) => {
+      state.favoriteAnimeArr.push(state.animeArr.filter((id: any) => id == 1));
+    },
+    deleteAnimeFromFavorite:(state:any) => {
+      state.favoriteAnimeArr.filter()
+    },
   },
 });
 
@@ -100,5 +106,7 @@ export const {
   getPrevAnimePage,
   getNextAnimePage,
   addMainPageAnime,
+  addAnimeToFavorite,
+  deleteAnimeFromFavorite,
 } = animeSlice.actions;
 export const animeReducer = animeSlice.reducer;

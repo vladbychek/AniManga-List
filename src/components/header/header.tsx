@@ -33,9 +33,6 @@ export const Header = () => {
             <NavLink to={"/login"}>
               <HeaderElement>Login</HeaderElement>
             </NavLink>
-            <NavLink to={"/signUp"}>
-              <HeaderElement>SignUp</HeaderElement>
-            </NavLink>
           </HeaderLinks>
           <MaterialUISwitch onClick={currentTheme.toggler} />
         </HeaderContent>

@@ -6,10 +6,12 @@ export const AllMainPages = styled.div`
   flex-wrap: wrap;
   margin: 0 auto;
   gap: 30px;
+  justify-content: center;
+
 `;
 
 export const MainPageContent = styled.div`
-  width: 1800px;
+  width: 88%;
   margin: 70px auto;
 `;
 

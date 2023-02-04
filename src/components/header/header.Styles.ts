@@ -9,7 +9,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const HeaderContent = styled.div`
-  width: 1400px;
+  width: 70%;
   height: 100%;
   margin: 0 auto;
   display: flex;

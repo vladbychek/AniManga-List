@@ -13,6 +13,7 @@ import {
   ListsPageContent,
 } from "../common/ListsPages.Styles";
 import { Loader } from "../common/loader.Styles";
+import { useAppDispatch } from "../redux/hooks";
 import {
   addManga,
   getNextMangaPage,
@@ -32,8 +33,12 @@ export const Manga = () => {
   const [disablePrevBtn, setDisablePrevBtn] = useState(false);
   const [disableNextBtn, setDisableNextBtn] = useState(false);
   const [fetchingSort, setFetchingSort] = useState(true);
+  const [disableDateSortBtn,setDisableDateSortBtn] = useState(false)
+  const [disableDateBackSortBtn,setDisableDateBackSortBtn] = useState(false)
+  const [disableRankSortBtn,setDisableRankSortBtn] = useState(false)
+  const [disableRankBackSortBtn,setDisableRankBackSortBtn] = useState(false)
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const currentTheme = useTheme();
 
   const getManga = async () => {
@@ -47,6 +52,7 @@ export const Manga = () => {
       setFetchingSort(false);
       dispatch(addManga({ newArr: resultManga.data.data}));
       disableBtns();
+      disableSortBtns();
     } catch (err) {
       console.log(err);
     }
@@ -86,6 +92,13 @@ export const Manga = () => {
     CurrentMangaPage === 53300 ? setDisableNextBtn(true) : setDisableNextBtn(false)
   }
 
+  const disableSortBtns = () => {
+    CurrentMangaSort === "startDate" ? setDisableDateSortBtn(true) : setDisableDateSortBtn(false);
+    CurrentMangaSort === "-startDate" ? setDisableDateBackSortBtn(true) : setDisableDateBackSortBtn(false);
+    CurrentMangaSort === "averageRating" ? setDisableRankSortBtn(true) : setDisableRankSortBtn(false);
+    CurrentMangaSort === "-averageRating" ? setDisableRankBackSortBtn(true) : setDisableRankBackSortBtn(false);
+  }
+
   return (
     <>
       <Loader>
@@ -102,12 +115,12 @@ export const Manga = () => {
           <ListsPageContent>
             <AllSortBtns>
               <SortTypeBtns>
-                <SortBtn theme={currentTheme.theme} title="sort by rank" onClick={SortByDicreasingRank}>Rank 🠕</SortBtn>
-                <SortBtn theme={currentTheme.theme} title="sort by rank" onClick={SortByIncreasingRank}>Rank 🠗</SortBtn>
+                <SortBtn disabled={disableRankBackSortBtn} theme={currentTheme.theme} title="sort by rank" onClick={SortByDicreasingRank}>Rank 🠕</SortBtn>
+                <SortBtn disabled={disableRankSortBtn} theme={currentTheme.theme} title="sort by rank" onClick={SortByIncreasingRank}>Rank 🠗</SortBtn>
               </SortTypeBtns>
               <SortTypeBtns>
-                <SortBtn theme={currentTheme.theme} title="sort by date" onClick={SortByIncreasingDate}>Date 🠕</SortBtn>
-                <SortBtn theme={currentTheme.theme} title="sort by date" onClick={SortByDicreasingDate}>Date 🠗</SortBtn>
+                <SortBtn disabled={disableDateSortBtn} theme={currentTheme.theme} title="sort by date" onClick={SortByIncreasingDate}>Date 🠕</SortBtn>
+                <SortBtn disabled={disableDateBackSortBtn} theme={currentTheme.theme} title="sort by date" onClick={SortByDicreasingDate}>Date 🠗</SortBtn>
               </SortTypeBtns>
             </AllSortBtns>
             <AllListsPages>

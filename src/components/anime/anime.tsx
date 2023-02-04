@@ -13,6 +13,7 @@ import {
   ListsPageContent,
 } from "../common/ListsPages.Styles";
 import { Loader } from "../common/loader.Styles";
+import { useAppDispatch } from "../redux/hooks";
 import {
   addAnime,
   getNextAnimePage,
@@ -22,7 +23,7 @@ import {
   sortAnimeByRank,
   sortAnimeByRankBack,
 } from "../redux/reducer/animeSlice/animeSlice";
-import { AppDispatch, RootState} from "../redux/store";
+import { RootState } from "../redux/store";
 import { AnimeItem } from "./animeItem/animeItem";
 
 
@@ -35,7 +36,8 @@ export const Anime = () => {
   const [disablePrevBtn, setDisablePrevBtn] = useState<boolean>(false);
   const [disableNextBtn, setDisableNextBtn] = useState<boolean>(false);
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
+
   const currentTheme = useTheme();
 
   const getAnime = async () => {

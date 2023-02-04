@@ -14,7 +14,7 @@ export const FullInfoAbout = styled.div`
 
 export const FullInfoAll = styled.div`
   margin: 20px auto 0;
-  width: 1170px;
+  width: 60%;
 `;
 
 export const FullInfoImg = styled.img`

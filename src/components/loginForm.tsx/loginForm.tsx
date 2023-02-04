@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { FormWrapper, FormTitle, FormText, FormCard, FormInput, FormText2, FormButton } from "../common/form.Styles";
+import { FormWrapper, FormTitle, FormText, FormCard, FormInput, FormText2, FormButton } from "./loginForm.Styles";
 import { useTheme } from "../../themeContext";
 
 

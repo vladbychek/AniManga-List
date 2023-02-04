@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "../../themeContext";
 import { axiosData } from "../axios/api";
 import { Loader } from "../common/loader.Styles";
+import { useAppDispatch } from "../redux/hooks";
 import { addMainPageAnime } from "../redux/reducer/animeSlice/animeSlice";
 import { addMainPageManga } from "../redux/reducer/mangaSlice/mangaSlice";
-import { AppDispatch } from "../redux/store";
 import {
   AllMainPages,
   MainPageContent,
@@ -18,7 +18,7 @@ import { MangaMainPageItem } from "./mainPageItems/mainPageMangaItem";
 export const MainPage = () => {
   const [loading, isLoading] = useState<boolean>(true);
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const currentTheme = useTheme();
 
   const getMainPage = async () => {

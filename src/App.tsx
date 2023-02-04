@@ -10,19 +10,15 @@ import { LoginForm } from "./components/loginForm.tsx/loginForm";
 import { MainPage } from "./components/mainPage/mainPage";
 import { Manga } from "./components/manga/manga";
 import { NotFound } from "./components/notFound/notFound";
-import { SignUpForm } from "./components/signUpForm/signUpForm";
 import { ThemeProvider } from "./themeContext";
 
 
-// фикс невлезающего текста
 // вход только залогиненым
 // пароль чтобы можно было смотреть
 // подключение сервера
 // добавление в избранное
-// Добавить типы
 // сделать правильно иморты
-// адаптив
-// ДВОЙНОе нажатие сортировки
+
 
 function App() {
   return (
@@ -35,7 +31,6 @@ function App() {
           <Route path="/anime" element={<Anime />} />
           <Route path="/manga" element={<Manga />} />
           <Route path="/login" element={<LoginForm />} />
-          <Route path="/signUp" element={<SignUpForm />} />
           <Route path="/favorite" element={<Favorite />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<MainPage />} />

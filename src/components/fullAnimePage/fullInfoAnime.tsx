@@ -19,7 +19,8 @@ import {
 import { useTheme } from "../../themeContext";
 import { Loader } from "../common/loader.Styles";
 import { MoreInfo } from "./fullAnimePageMoreInfo/fullAnimePageMoreInfo";
-import { AppDispatch, RootState, } from "../redux/store";
+import { useAppDispatch } from "../redux/hooks";
+import { RootState } from "../redux/store";
 
 const RatingLogo = require("../img/RatingLogo.png");
 const loda = require("lodash");
@@ -31,7 +32,7 @@ export const FullInfoAnime = () => {
 
   const [loading, isLoading] = useState<boolean>(true);
   const { id } = useParams();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const currentTheme = useTheme();
 
   const getFullAnimeInformation = async () => {
@@ -67,11 +68,10 @@ export const FullInfoAnime = () => {
               alt=""
             />
             <FullTitleAndAboutWrapper theme={currentTheme.theme}>
-              <div><RatingWrapper>{!FullInfoAnimeStore.attributes?.averageRating ? "no rating" : `${FullInfoAnimeStore.attributes.averageRating}`} <RatingIcon src={RatingLogo} alt="" /></RatingWrapper>
+              <RatingWrapper>{!FullInfoAnimeStore.attributes?.averageRating ? "no rating" : `${FullInfoAnimeStore.attributes.averageRating}`} <RatingIcon src={RatingLogo} alt="" /></RatingWrapper>
               <FullInfoTitle>
                 {FullInfoAnimeStore.attributes?.canonicalTitle}
               </FullInfoTitle>
-              </div>
               <FullInfoAbout>
                 {FullInfoAnimeStore.attributes?.description}
               </FullInfoAbout>

@@ -6,10 +6,11 @@ export const AllListsPages = styled.div`
   flex-wrap: wrap;
   margin: 0 auto;
   gap: 30px;
+  justify-content: center;
 `;
 
 export const ListsPageContent = styled.div`
-  width: 1170px;
+  width: 60%;
   margin: 0 auto;
 `;
 

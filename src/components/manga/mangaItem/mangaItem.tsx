@@ -5,7 +5,7 @@ import {
   ListsPages,
   ListsPagesTitle,
 } from "../../common/listpagesItem.Styles";
-import { MangaType } from "../../redux/reducer/mangaSlice/manga,types";
+import { MangaType } from "../../redux/reducer/mangaSlice/manga.types";
 import { RootState } from "../../redux/store";
 
 export const MangaItem = () => {

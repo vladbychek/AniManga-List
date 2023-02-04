@@ -17,7 +17,8 @@ import {
 import { useTheme } from "../../themeContext";
 import { Loader } from "../common/loader.Styles";
 import { MoreInfo } from "./fullMangaPageMoreInfo/fullMangaPageMoreInfo";
-import { AppDispatch, RootState } from "../redux/store";
+import { useAppDispatch } from "../redux/hooks";
+import { RootState } from "../redux/store";
 
 const RatingLogo = require("../img/RatingLogo.png");
 
@@ -28,7 +29,7 @@ export const FullInfoManga = () => {
   );
   const [loading, isLoading] = useState<boolean>(true);
   const { id } = useParams();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
   const currentTheme = useTheme();
 
   const getFullMangaInformation = async () => {
@@ -64,12 +65,10 @@ export const FullInfoManga = () => {
               src={FullInfoMangaStore.attributes?.posterImage.original}
             />
             <FullTitleAndAboutWrapper theme={currentTheme.theme}>
-              <div>
                 <RatingWrapper>{!FullInfoMangaStore.attributes?.averageRating ? "no rating" : `${FullInfoMangaStore.attributes.averageRating}`} <RatingIcon src={RatingLogo} alt="" /></RatingWrapper>
               <FullInfoTitle>
                 {FullInfoMangaStore.attributes?.canonicalTitle}
               </FullInfoTitle>
-              </div>
               <FullInfoAbout>
                 {FullInfoMangaStore.attributes?.description}
               </FullInfoAbout>

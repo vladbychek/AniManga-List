@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { MangaType } from "../../redux/reducer/mangaSlice/manga,types";
+import { MangaType } from "../../redux/reducer/mangaSlice/manga.types";
 import { RootState } from "../../redux/store";
 import { MainPagesItemWrapper, MainPagesItem, MainPagesItemTitle } from "./mainPageItem.Styles";
 

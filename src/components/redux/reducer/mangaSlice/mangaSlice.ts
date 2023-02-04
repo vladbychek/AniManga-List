@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MangaFullInfoType, MangaMainPageType, MangaNewArrType, MangaStateType, MangaType } from "./manga,types";
+import { MangaFullInfoType, MangaMainPageType, MangaNewArrType, MangaStateType, MangaType } from "./manga.types";
 
 
 
@@ -97,6 +97,9 @@ const mangaSlice = createSlice({
     addMangaToFavorite: (state: any) => {
       state.favoriteMangaArr.push(state.mangaArr.filter((id: any) => id == 1));
     },
+    deleteMangaFromFavorite:(state:any) => {
+      state.favoriteMangaArr.filter()
+    },
   },
 });
 
@@ -110,5 +113,7 @@ export const {
   getNextMangaPage,
   getPrevMangaPage,
   addMainPageManga,
+  addMangaToFavorite,
+  deleteMangaFromFavorite,
 } = mangaSlice.actions;
 export const mangaReducer = mangaSlice.reducer;
