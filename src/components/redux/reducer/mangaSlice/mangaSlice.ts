@@ -94,11 +94,12 @@ const mangaSlice = createSlice({
       ])
     );
     },
-    addMangaToFavorite: (state: any) => {
-      state.favoriteMangaArr.push(state.mangaArr.filter((id: any) => id == 1));
+    addMangaToFavorite: (state) => {
+      state.favoriteMangaArr.push(state.fullMangaInfoArr);
+
     },
-    deleteMangaFromFavorite:(state:any) => {
-      state.favoriteMangaArr.filter()
+    removeMangaFromFavorite:(state, action: PayloadAction<string>) => {
+      state.favoriteMangaArr = state.favoriteMangaArr.flat().filter((item: MangaType) => item.id !== action.payload);
     },
   },
 });
@@ -114,6 +115,6 @@ export const {
   getPrevMangaPage,
   addMainPageManga,
   addMangaToFavorite,
-  deleteMangaFromFavorite,
+  removeMangaFromFavorite,
 } = mangaSlice.actions;
 export const mangaReducer = mangaSlice.reducer;

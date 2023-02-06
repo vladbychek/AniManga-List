@@ -5,13 +5,12 @@ export const AllMainPages = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  gap: 30px;
+  gap: 25px;
   justify-content: center;
-
 `;
 
 export const MainPageContent = styled.div`
-  width: 88%;
+  width: 92%;
   margin: 70px auto;
 `;
 

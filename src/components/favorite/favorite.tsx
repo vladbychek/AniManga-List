@@ -1,27 +1,67 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { useTheme } from "../../themeContext";
-import { RootState } from "../redux/store";
+import {
+  ListsPages,
+  ListsPagesTitle,
+  ListsPagesWrapper,
+} from "../common/listpagesItem.Styles";
+import { AllListsPages, ListsPageContent } from "../common/ListsPages.Styles";
+import { IRootState } from "../redux/store";
 import {
   FavEmptyWrapper,
   FavEmptyText,
   FavEmptyStyledImg,
+  FavAllListsPages,
+  FavPageContent,
+  FavPages,
+  FavPagesTitle,
+  FavPagesWrapper,
 } from "./favorite.Styles";
 
 const favimg = require("../img/favimg.png");
 
 export const Favorite = () => {
-  const FavoriteAnimeStore = useSelector((state: RootState) => state.anime.favoriteAnimeArr);
-  const FavoriteMangaStore = useSelector((state: RootState) => state.manga.favoriteMangaArr);
+  const FavoriteAnimeStore = useSelector(
+    (state: IRootState) => state.anime.favoriteAnimeArr
+  );
+  const FavoriteMangaStore = useSelector(
+    (state: IRootState) => state.manga.favoriteMangaArr
+  );
 
-  const favoriteArr = [...FavoriteMangaStore, ...FavoriteAnimeStore];
+  const favoriteArr = [...FavoriteMangaStore, ...FavoriteAnimeStore].flat();
 
-  console.log(favoriteArr)
   const currentTheme = useTheme();
 
   return (
     <>
       {favoriteArr.length ? (
-        <div>123</div>
+        <FavPageContent>
+          <FavAllListsPages>
+            {favoriteArr?.map((item: any) => (
+              <>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  title={item.attributes?.canonicalTitle}
+                  key={item.id}
+                  to={
+                    item.type === "manga"
+                      ? `manga/${item.id}`
+                      : `anime/${item.id}`
+                  }
+                >
+                  <FavPagesWrapper>
+                    <FavPages img={item.attributes?.posterImage?.original}>
+                      <FavPagesTitle>
+                        {item.attributes?.canonicalTitle}
+                      </FavPagesTitle>
+                    </FavPages>
+                  </FavPagesWrapper>
+                </Link>
+              </>
+            ))}
+          </FavAllListsPages>
+        </FavPageContent>
       ) : (
         <FavEmptyWrapper>
           <FavEmptyText theme={currentTheme.theme}>

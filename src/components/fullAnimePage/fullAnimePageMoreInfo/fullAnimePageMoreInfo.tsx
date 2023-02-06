@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import { useTheme } from "../../../themeContext";
 import { MoreInfoContent, MoreInfoTitle, MoreInfoTitleText } from "../../common/fullListsPageMoreInfo.Styles";
-import { RootState } from "../../redux/store";
+import { IRootState } from "../../redux/store";
 
 
 export const MoreInfo = () => {
   const FullInfoAnimeStore = useSelector(
-    (state: RootState) => state.anime.fullAnimeInfoArr
+    (state: IRootState) => state.anime.fullAnimeInfoArr
   );
 
   const currentTheme = useTheme();

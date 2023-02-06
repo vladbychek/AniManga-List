@@ -23,13 +23,13 @@ import {
   sortAnimeByRank,
   sortAnimeByRankBack,
 } from "../redux/reducer/animeSlice/animeSlice";
-import { RootState } from "../redux/store";
+import { IRootState } from "../redux/store";
 import { AnimeItem } from "./animeItem/animeItem";
 
 
 export const Anime = () => {
-  const CurrentAnimePage = useSelector((state: RootState) => state.anime.currAnimePage);
-  const CurrentAnimeSort = useSelector((state: RootState) => state.anime.animeCurrSort);
+  const CurrentAnimePage = useSelector((state: IRootState) => state.anime.currAnimePage);
+  const CurrentAnimeSort = useSelector((state: IRootState) => state.anime.animeCurrSort);
   
   const [fetchingSort, setFetchingSort] = useState<boolean>(true);
   const [loading, isLoading] = useState<boolean>(true);
@@ -58,6 +58,7 @@ export const Anime = () => {
   useEffect(() => {
     getAnime();
   }, [CurrentAnimePage, fetchingSort]);
+
 
   const SortByIncreasingDate = () => {
     dispatch(sortAnimeByDate());

@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AnimeType } from "../../redux/reducer/animeSlice/anime.types";
-import { RootState } from "../../redux/store";
+import { IRootState } from "../../redux/store";
 import { MainPagesItemWrapper, MainPagesItem, MainPagesItemTitle } from "./mainPageItem.Styles";
 
 
 
 export const AnimeMainPageItem = () => {
-   const AnimeMainPageStore = useSelector((state: RootState) => state.anime.mainPageAnimeArr);
+   const AnimeMainPageStore = useSelector((state: IRootState) => state.anime.mainPageAnimeArr);
 
    return(
       <>

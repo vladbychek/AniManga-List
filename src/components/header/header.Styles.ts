@@ -37,3 +37,20 @@ export const HeaderElement = styled.div`
       text-shadow: none;
   };
 `
+
+
+
+export const HeaderLogoutBtn = styled.button`
+  background: none;
+  color: ${({ theme }) => (theme === "light" ? "black" : "white")};
+  font-family: "Rubik Bubbles", cursive;
+  font-size: 30px;
+border: none;
+cursor: pointer;
+&:hover{
+  text-shadow: red 2px 5px;
+};
+  &:active{
+    text-shadow: none;
+};
+`

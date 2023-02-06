@@ -34,36 +34,40 @@ export const FormInput = styled.input`
   font-size: 16px;
   border: 2px solid #ebebeb;
 `;
-export const FormText2 = styled.div`
-  font-size: 16px;
-  font-weight: 600;
-  text-align: end;
-`;
 
 export const FormButton = styled.button`
   width: 100%;
   border: 0;
-  color: #f9f9f9;
-  background-color: #ff8c00;
+  color: ${({ theme }) => (theme === "light" ? "black" : "#f9f9f9")}; 
+  background-color: ${({ theme }) => (theme === "light" ? "white" : "#ff8c00")};
   font-weight: 600;
   height: 56px;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   &:hover {
-    color: black;
+    color: ${({ theme }) => (theme === "light" ? "#ff8c00" : "black")};
   }
   &: active {
-    color: #f9f9f9;
+    color: ${({ theme }) => (theme === "light" ? "black" : "#f9f9f9")};
   }
-  &: disabled {
-    &: active {
-      color: #f9f9f9;
-    }
-    &:hover {
-      color: #f9f9f9;
-    }
-    background-color: gray;
-    cursor: auto;
-  }
+`;
+
+
+export const LoggedWrapper = styled.div`
+  width: 1170px;
+  margin: 100px auto;
+`;
+
+export const LoggedText = styled.div`
+  font-family: "PT Serif", serif;
+  font-weight: bold;
+  text-align: center;
+  color: ${({ theme }) => (theme === "light" ? "black" : "white")};
+`;
+
+export const LoggedImg = styled.img`
+  width: 400px;
+  display: block;
+  margin: 0 auto;
 `;

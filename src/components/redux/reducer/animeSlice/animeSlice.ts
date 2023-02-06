@@ -87,11 +87,11 @@ const animeSlice = createSlice({
       ])
     );
     },
-    addAnimeToFavorite: (state: any) => {
-      state.favoriteAnimeArr.push(state.animeArr.filter((id: any) => id == 1));
+    addAnimeToFavorite: (state) => {
+      state.favoriteAnimeArr.push(state.fullAnimeInfoArr);
     },
-    deleteAnimeFromFavorite:(state:any) => {
-      state.favoriteAnimeArr.filter()
+    removeAnimeFromFavorite:(state, action: PayloadAction<string>) => {
+      state.favoriteAnimeArr = state.favoriteAnimeArr.filter((item: AnimeType) => item.id !== action.payload);
     },
   },
 });
@@ -107,6 +107,6 @@ export const {
   getNextAnimePage,
   addMainPageAnime,
   addAnimeToFavorite,
-  deleteAnimeFromFavorite,
+  removeAnimeFromFavorite,
 } = animeSlice.actions;
 export const animeReducer = animeSlice.reducer;

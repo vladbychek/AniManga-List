@@ -4,9 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "../../themeContext";
 import { axiosData } from "../axios/api";
 import { Loader } from "../common/loader.Styles";
+import { LoginForm } from "../loginForm.tsx/loginForm";
 import { useAppDispatch } from "../redux/hooks";
 import { addMainPageAnime } from "../redux/reducer/animeSlice/animeSlice";
+import { getProfile, logoutUser } from "../redux/reducer/auth/actionCreators";
 import { addMainPageManga } from "../redux/reducer/mangaSlice/mangaSlice";
+import { IRootState } from "../redux/store";
 import {
   AllMainPages,
   MainPageContent,
@@ -41,7 +44,7 @@ export const MainPage = () => {
   useEffect(() => {
     getMainPage();
   }, []);
-
+  
   return (
     <>
       <Loader>

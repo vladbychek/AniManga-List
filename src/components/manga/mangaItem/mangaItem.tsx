@@ -6,10 +6,10 @@ import {
   ListsPagesTitle,
 } from "../../common/listpagesItem.Styles";
 import { MangaType } from "../../redux/reducer/mangaSlice/manga.types";
-import { RootState } from "../../redux/store";
+import { IRootState } from "../../redux/store";
 
 export const MangaItem = () => {
-  const MangaStore = useSelector((state: RootState) => state.manga.mangaArr);
+  const MangaStore = useSelector((state: IRootState) => state.manga.mangaArr);
 
   return (
     <>
