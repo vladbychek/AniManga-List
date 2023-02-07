@@ -6,7 +6,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import { AnimeItem } from "./animeItem/animeItem";
 import { useTheme } from "../../../themeContext";
 import { axiosData } from "../../axios/api";
-import { ListsPageContent, AllSortBtns, SortTypeBtns, SortBtn, AllListsPages, AllPaginationBtns, PaginationBtn } from "../../common/ListsPages.Styles";
+import { ListsPageContent, AllSortBtns, SortTypeBtns, SortBtn, AllListsPages, AllPaginationBtns, PaginationBtn } from "./anime.Styles";
 import { Loader } from "../../common/loader.Styles";
 import { useAppDispatch } from "../../redux/hooks";
 import { addAnime, sortAnimeByDate, sortAnimeByDateBack, sortAnimeByRank, sortAnimeByRankBack, getPrevAnimePage, getNextAnimePage } from "../../redux/reducer/animeSlice/animeSlice";

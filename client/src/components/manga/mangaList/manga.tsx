@@ -3,15 +3,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { useTheme } from "../../../themeContext";
 import { axiosData } from "../../axios/api";
-import {
-  AllSortBtns,
-  SortBtn,
-  SortTypeBtns,
-  AllPaginationBtns,
-  PaginationBtn,
-  AllListsPages,
-  ListsPageContent,
-} from "../../common/ListsPages.Styles";
+
 import { Loader } from "../../common/loader.Styles";
 import { useAppDispatch } from "../../redux/hooks";
 import {
@@ -24,6 +16,7 @@ import {
   sortMangaByRankBack,
 } from "../../redux/reducer/mangaSlice/mangaSlice";
 import { IRootState } from "../../redux/store";
+import { AllListsPages, AllPaginationBtns, AllSortBtns, ListsPageContent, PaginationBtn, SortBtn, SortTypeBtns } from "./manga.Styles";
 import { MangaItem } from "./mangaItem/mangaItem";
 
 export const Manga = () => {

@@ -11,13 +11,13 @@ import { ThreeCircles } from "react-loader-spinner";
 import { MoreInfo } from "./fullAnimePageMoreInfo/fullAnimePageMoreInfo";
 import { useTheme } from "../../../themeContext";
 import { axiosData } from "../../axios/api";
-import { FullInfoAll, FullInfoImgAndTitleWrapper, FullInfoImg, FullTitleAndAboutWrapper, RatingWrapper, RatingIcon, FullInfoTitle, FullInfoAbout, FavBtnsWrapper, FavBtn } from "../../common/fullInfoPage.Styles";
 import { Loader } from "../../common/loader.Styles";
 import { useAppDispatch } from "../../redux/hooks";
 import { AnimeType } from "../../redux/reducer/animeSlice/anime.types";
 import { getFullAnimeInfo, addAnimeToFavorite, removeAnimeFromFavorite } from "../../redux/reducer/animeSlice/animeSlice";
 import { MangaType } from "../../redux/reducer/mangaSlice/manga.types";
 import { IRootState } from "../../redux/store";
+import { FavBtn, FavBtnsWrapper, FullInfoAbout, FullInfoAll, FullInfoImg, FullInfoImgAndTitleWrapper, FullInfoTitle, FullTitleAndAboutWrapper, RatingIcon, RatingWrapper } from "./fullPage.Styles";
 
 
 const RatingLogo = require("../../../img/RatingLogo.png");

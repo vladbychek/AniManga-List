@@ -8,7 +8,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import { MoreInfo } from "./fullMangaPageMoreInfo/fullMangaPageMoreInfo";
 import { useTheme } from "../../../themeContext";
 import { axiosData } from "../../axios/api";
-import { FullInfoAll, FullInfoImgAndTitleWrapper, FullInfoImg, FullTitleAndAboutWrapper, RatingWrapper, RatingIcon, FullInfoTitle, FullInfoAbout, FavBtnsWrapper, FavBtn } from "../../common/fullInfoPage.Styles";
+import { FullInfoAll, FullInfoImgAndTitleWrapper, FullInfoImg, FullTitleAndAboutWrapper, RatingWrapper, RatingIcon, FullInfoTitle, FullInfoAbout, FavBtnsWrapper, FavBtn } from "./fullPage.Styles";
 import { Loader } from "../../common/loader.Styles";
 import { useAppDispatch } from "../../redux/hooks";
 import { AnimeType } from "../../redux/reducer/animeSlice/anime.types";

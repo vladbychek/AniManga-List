@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useTheme } from "../../../../themeContext";
-import { MoreInfoContent, MoreInfoTitle, MoreInfoTitleText } from "../../../common/fullListsPageMoreInfo.Styles";
+import { MoreInfoContent, MoreInfoTitle, MoreInfoTitleText } from "../../../manga/fullMangaPage/fullMangaPageMoreInfo/fullListsPageMoreInfo.Styles";
 import { IRootState } from "../../../redux/store";
 
 
