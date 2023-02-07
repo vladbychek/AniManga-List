@@ -14,7 +14,7 @@ export interface AnimeType {
     };
     episodeCount: number;
   };
-};
+}
 
 export type AnimeArrType = Array<AnimeType>;
 
@@ -25,16 +25,16 @@ export interface AnimeStateType {
   currAnimePage: number;
   mainPageAnimeArr: AnimeArrType;
   favoriteAnimeArr: AnimeArrType;
-};
+}
 
 export interface AnimeNewArrType {
   newArr: AnimeArrType;
-};
+}
 
 export interface AnimeFullInfoType {
   fullInfo: AnimeType;
-};
+}
 
 export interface AnimeMainPageType {
   mainPageArr: AnimeArrType;
-};
+}

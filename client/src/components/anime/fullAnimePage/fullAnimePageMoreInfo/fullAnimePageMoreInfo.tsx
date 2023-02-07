@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { useTheme } from "../../../themeContext";
-import { MoreInfoContent, MoreInfoTitle, MoreInfoTitleText } from "../../common/fullListsPageMoreInfo.Styles";
-import { IRootState } from "../../redux/store";
+import { useTheme } from "../../../../themeContext";
+import { MoreInfoContent, MoreInfoTitle, MoreInfoTitleText } from "../../../common/fullListsPageMoreInfo.Styles";
+import { IRootState } from "../../../redux/store";
 
 
 export const MoreInfo = () => {
@@ -13,7 +13,7 @@ export const MoreInfo = () => {
 
   return (
     <MoreInfoContent>
-      <MoreInfoTitle> 
+      <MoreInfoTitle>
         Type<br></br>
         <MoreInfoTitleText theme={currentTheme.theme}>
           {FullInfoAnimeStore.type}
@@ -40,7 +40,7 @@ export const MoreInfo = () => {
       <MoreInfoTitle>
         Amount of episodes<br></br>
         <MoreInfoTitleText theme={currentTheme.theme}>
-        {!FullInfoAnimeStore.attributes?.episodeCount
+          {!FullInfoAnimeStore.attributes?.episodeCount
             ? "-"
             : `${FullInfoAnimeStore.attributes.episodeCount}`}
         </MoreInfoTitleText>

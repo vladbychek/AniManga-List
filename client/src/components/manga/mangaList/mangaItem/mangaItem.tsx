@@ -4,9 +4,9 @@ import {
   ListsPagesWrapper,
   ListsPages,
   ListsPagesTitle,
-} from "../../common/listpagesItem.Styles";
-import { MangaType } from "../../redux/reducer/mangaSlice/manga.types";
-import { IRootState } from "../../redux/store";
+} from "../../../common/listpagesItem.Styles";
+import { MangaType } from "../../../redux/reducer/mangaSlice/manga.types";
+import { IRootState } from "../../../redux/store";
 
 export const MangaItem = () => {
   const MangaStore = useSelector((state: IRootState) => state.manga.mangaArr);

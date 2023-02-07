@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
-import { useTheme } from "../../../themeContext";
-import { MoreInfoContent, MoreInfoTitle, MoreInfoTitleText } from "../../common/fullListsPageMoreInfo.Styles";
-import { IRootState } from "../../redux/store";
+import { useTheme } from "../../../../themeContext";
+import { MoreInfoContent, MoreInfoTitle, MoreInfoTitleText } from "../../../common/fullListsPageMoreInfo.Styles";
+import { IRootState } from "../../../redux/store";
+
+
 
 export const MoreInfo = () => {
   const FullInfoMangaStore = useSelector(

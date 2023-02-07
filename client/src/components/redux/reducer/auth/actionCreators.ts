@@ -4,7 +4,15 @@ import api from "../../../../api";
 import { ILoginRequest, ILoginResponse } from "../../../../api/auth/types";
 import { isTokenExpired } from "../../../../utils/jwt";
 import { store } from "../../store";
-import { loadProfileFailure, loadProfileStart, loadProfileSucess, loginFailure, loginStart, loginSucess, logoutSuccess } from "./authReducer";
+import {
+  loadProfileFailure,
+  loadProfileStart,
+  loadProfileSucess,
+  loginFailure,
+  loginStart,
+  loginSucess,
+  logoutSuccess,
+} from "./authSlice";
 import { history } from "../../../../utils/history";
 
 export const loginUser =

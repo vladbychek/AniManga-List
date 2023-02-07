@@ -1,20 +1,12 @@
 import { useEffect, useState } from "react";
 import { ThreeCircles } from "react-loader-spinner";
-import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "../../themeContext";
 import { axiosData } from "../axios/api";
 import { Loader } from "../common/loader.Styles";
-import { LoginForm } from "../loginForm.tsx/loginForm";
 import { useAppDispatch } from "../redux/hooks";
 import { addMainPageAnime } from "../redux/reducer/animeSlice/animeSlice";
-import { getProfile, logoutUser } from "../redux/reducer/auth/actionCreators";
 import { addMainPageManga } from "../redux/reducer/mangaSlice/mangaSlice";
-import { IRootState } from "../redux/store";
-import {
-  AllMainPages,
-  MainPageContent,
-  MainPageText,
-} from "./mainPage.Styles";
+import { AllMainPages, MainPageContent, MainPageText } from "./mainPage.Styles";
 import { AnimeMainPageItem } from "./mainPageItems/mainPageAnimeItem";
 import { MangaMainPageItem } from "./mainPageItems/mainPageMangaItem";
 
@@ -34,8 +26,12 @@ export const MainPage = () => {
         `/trending/anime?page%5Blimit%5D=5&page%5Boffset%5D=0`
       );
       isLoading(false);
-      dispatch(addMainPageManga({ mainPageArr: resultMainPageManga.data.data }));
-      dispatch(addMainPageAnime({ mainPageArr: resultMainPageAnime.data.data }));
+      dispatch(
+        addMainPageManga({ mainPageArr: resultMainPageManga.data.data })
+      );
+      dispatch(
+        addMainPageAnime({ mainPageArr: resultMainPageAnime.data.data })
+      );
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +40,7 @@ export const MainPage = () => {
   useEffect(() => {
     getMainPage();
   }, []);
-  
+
   return (
     <>
       <Loader>
@@ -57,24 +53,24 @@ export const MainPage = () => {
         />
       </Loader>
       {!loading && (
-      <MainPageContent>
-        <MainPageText theme={currentTheme.theme}>
-          The most popular manga now:
-        </MainPageText>
-        <AllMainPages>
-          <>
-          <MangaMainPageItem/>
-          </>
-        </AllMainPages>
-        <MainPageText theme={currentTheme.theme}>
-          The most popular anime now:
-        </MainPageText>
-        <AllMainPages>
-          <>
-          <AnimeMainPageItem/>
-          </>
-        </AllMainPages>
-      </MainPageContent>
+        <MainPageContent>
+          <MainPageText theme={currentTheme.theme}>
+            The most popular manga now:
+          </MainPageText>
+          <AllMainPages>
+            <>
+              <MangaMainPageItem />
+            </>
+          </AllMainPages>
+          <MainPageText theme={currentTheme.theme}>
+            The most popular anime now:
+          </MainPageText>
+          <AllMainPages>
+            <>
+              <AnimeMainPageItem />
+            </>
+          </AllMainPages>
+        </MainPageContent>
       )}
     </>
   );

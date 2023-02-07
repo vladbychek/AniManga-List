@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MangaFullInfoType, MangaMainPageType, MangaNewArrType, MangaStateType, MangaType } from "./manga.types";
-
-
+import {
+  MangaFullInfoType,
+  MangaMainPageType,
+  MangaNewArrType,
+  MangaStateType,
+  MangaType,
+} from "./manga.types";
 
 const initialState: MangaStateType = {
   mangaArr: [],
@@ -12,35 +16,33 @@ const initialState: MangaStateType = {
   favoriteMangaArr: [],
 };
 
-
 const loda = require("lodash");
 
 const mangaSlice = createSlice({
   name: "manga",
   initialState,
   reducers: {
-    addManga: (state, action: PayloadAction<MangaNewArrType> ) => {
+    addManga: (state, action: PayloadAction<MangaNewArrType>) => {
       state.mangaArr = action.payload.newArr.map((item: MangaType) =>
-      loda.pick(item, [
-        "id",
-        "type",
-        "attributes.description",
-        "attributes.canonicalTitle",
-        "attributes.averageRating",
-        "attributes.startDate",
-        "attributes.ageRating",
-        "attributes.subtype",
-        "attributes.status",
-        "attributes.posterImage.original",
-        "attributes.chapterCount",
-        "attributes.volumeCount",
-        "attributes.serialization",
-      ])
-    );
+        loda.pick(item, [
+          "id",
+          "type",
+          "attributes.description",
+          "attributes.canonicalTitle",
+          "attributes.averageRating",
+          "attributes.startDate",
+          "attributes.ageRating",
+          "attributes.subtype",
+          "attributes.status",
+          "attributes.posterImage.original",
+          "attributes.chapterCount",
+          "attributes.volumeCount",
+          "attributes.serialization",
+        ])
+      );
     },
     getFullMangaInfo: (state, action: PayloadAction<MangaFullInfoType>) => {
-      state.fullMangaInfoArr =
-      loda.pick(action.payload.fullInfo, [
+      state.fullMangaInfoArr = loda.pick(action.payload.fullInfo, [
         "id",
         "type",
         "attributes.description",
@@ -54,8 +56,7 @@ const mangaSlice = createSlice({
         "attributes.chapterCount",
         "attributes.volumeCount",
         "attributes.serialization",
-      ]
-    );
+      ]);
     },
     sortMangaByDate: (state) => {
       state.mangaCurrSort = "startDate";
@@ -76,30 +77,32 @@ const mangaSlice = createSlice({
       state.currMangaPage = state.currMangaPage - 20;
     },
     addMainPageManga: (state, action: PayloadAction<MangaMainPageType>) => {
-      state.mainPageMangaArr = action.payload.mainPageArr.map((item: MangaType) =>
-      loda.pick(item, [
-        "id",
-        "type",
-        "attributes.description",
-        "attributes.canonicalTitle",
-        "attributes.averageRating",
-        "attributes.startDate",
-        "attributes.ageRating",
-        "attributes.subtype",
-        "attributes.status",
-        "attributes.posterImage.original",
-        "attributes.chapterCount",
-        "attributes.volumeCount",
-        "attributes.serialization",
-      ])
-    );
+      state.mainPageMangaArr = action.payload.mainPageArr.map(
+        (item: MangaType) =>
+          loda.pick(item, [
+            "id",
+            "type",
+            "attributes.description",
+            "attributes.canonicalTitle",
+            "attributes.averageRating",
+            "attributes.startDate",
+            "attributes.ageRating",
+            "attributes.subtype",
+            "attributes.status",
+            "attributes.posterImage.original",
+            "attributes.chapterCount",
+            "attributes.volumeCount",
+            "attributes.serialization",
+          ])
+      );
     },
     addMangaToFavorite: (state) => {
       state.favoriteMangaArr.push(state.fullMangaInfoArr);
-
     },
-    removeMangaFromFavorite:(state, action: PayloadAction<string>) => {
-      state.favoriteMangaArr = state.favoriteMangaArr.flat().filter((item: MangaType) => item.id !== action.payload);
+    removeMangaFromFavorite: (state, action: PayloadAction<string>) => {
+      state.favoriteMangaArr = state.favoriteMangaArr
+        .flat()
+        .filter((item: MangaType) => item.id !== action.payload);
     },
   },
 });

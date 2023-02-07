@@ -4,7 +4,7 @@ import { useTheme } from "../../themeContext";
 import { useAppDispatch } from "../redux/hooks";
 import { logoutUser } from "../redux/reducer/auth/actionCreators";
 import { IRootState } from "../redux/store";
-import { MaterialUISwitch } from "../switch/switch";
+import { MaterialUISwitch } from "./switch/switch";
 import {
   HeaderContent,
   HeaderElement,
@@ -13,7 +13,7 @@ import {
   HeaderLogoutBtn,
   HeaderWrapper,
 } from "./header.Styles";
-const HeaderLogo = require("../img/logo.png");
+const HeaderLogo = require("../../img/logo.png");
 
 export const Header = () => {
   const dispatch = useAppDispatch();

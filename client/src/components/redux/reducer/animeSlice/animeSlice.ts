@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AnimeStateType, AnimeNewArrType, AnimeType, AnimeFullInfoType, AnimeMainPageType } from "./anime.types";
-
-
+import {
+  AnimeStateType,
+  AnimeNewArrType,
+  AnimeType,
+  AnimeFullInfoType,
+  AnimeMainPageType,
+} from "./anime.types";
 
 const initialState: AnimeStateType = {
   animeArr: [],
@@ -36,8 +40,7 @@ const animeSlice = createSlice({
       );
     },
     getFullAnimeInfo: (state, action: PayloadAction<AnimeFullInfoType>) => {
-      state.fullAnimeInfoArr =
-      loda.pick(action.payload.fullInfo, [
+      state.fullAnimeInfoArr = loda.pick(action.payload.fullInfo, [
         "id",
         "type",
         "attributes.description",
@@ -49,8 +52,7 @@ const animeSlice = createSlice({
         "attributes.status",
         "attributes.posterImage.original",
         "attributes.episodeCount",
-      ]
-    );
+      ]);
     },
     sortAnimeByDate: (state) => {
       state.animeCurrSort = "startDate";
@@ -71,27 +73,30 @@ const animeSlice = createSlice({
       state.currAnimePage = state.currAnimePage - 20;
     },
     addMainPageAnime: (state, action: PayloadAction<AnimeMainPageType>) => {
-      state.mainPageAnimeArr = action.payload.mainPageArr.map((item: AnimeType) =>
-      loda.pick(item, [
-        "id",
-        "type",
-        "attributes.description",
-        "attributes.canonicalTitle",
-        "attributes.averageRating",
-        "attributes.startDate",
-        "attributes.ageRating",
-        "attributes.subtype",
-        "attributes.status",
-        "attributes.posterImage.original",
-        "attributes.episodeCount",
-      ])
-    );
+      state.mainPageAnimeArr = action.payload.mainPageArr.map(
+        (item: AnimeType) =>
+          loda.pick(item, [
+            "id",
+            "type",
+            "attributes.description",
+            "attributes.canonicalTitle",
+            "attributes.averageRating",
+            "attributes.startDate",
+            "attributes.ageRating",
+            "attributes.subtype",
+            "attributes.status",
+            "attributes.posterImage.original",
+            "attributes.episodeCount",
+          ])
+      );
     },
     addAnimeToFavorite: (state) => {
       state.favoriteAnimeArr.push(state.fullAnimeInfoArr);
     },
-    removeAnimeFromFavorite:(state, action: PayloadAction<string>) => {
-      state.favoriteAnimeArr = state.favoriteAnimeArr.filter((item: AnimeType) => item.id !== action.payload);
+    removeAnimeFromFavorite: (state, action: PayloadAction<string>) => {
+      state.favoriteAnimeArr = state.favoriteAnimeArr.filter(
+        (item: AnimeType) => item.id !== action.payload
+      );
     },
   },
 });

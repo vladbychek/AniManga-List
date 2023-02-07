@@ -38,7 +38,7 @@ export const FormInput = styled.input`
 export const FormButton = styled.button`
   width: 100%;
   border: 0;
-  color: ${({ theme }) => (theme === "light" ? "black" : "#f9f9f9")}; 
+  color: ${({ theme }) => (theme === "light" ? "black" : "#f9f9f9")};
   background-color: ${({ theme }) => (theme === "light" ? "white" : "#ff8c00")};
   font-weight: 600;
   height: 56px;
@@ -52,7 +52,6 @@ export const FormButton = styled.button`
     color: ${({ theme }) => (theme === "light" ? "black" : "#f9f9f9")};
   }
 `;
-
 
 export const LoggedWrapper = styled.div`
   width: 1170px;

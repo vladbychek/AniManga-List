@@ -27,23 +27,22 @@ export const FullInfoImg = styled.img`
 export const FullInfoImgAndTitleWrapper = styled.div`
   display: flex;
 `;
-export const FullTitleAndAboutWrapper = styled.div<{theme: string}>`
+export const FullTitleAndAboutWrapper = styled.div<{ theme: string }>`
   margin: 20px 15px 0;
-  color:  ${({ theme }) => (theme === "light" ? "black" : "white")};
+  color: ${({ theme }) => (theme === "light" ? "black" : "white")};
 `;
 
 export const RatingIcon = styled.img`
   width: 20px;
-`
+`;
 
 export const RatingWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
-`
-
+`;
 
 export const FavBtn = styled.button`
-background: ${({ theme }) =>
+  background: ${({ theme }) =>
     theme === "light"
       ? "linear-gradient(90deg, #ff7b00, #ffa53d)"
       : "linear-gradient(to bottom, #F2F3F4 0%, #E3E4E5 100%);"};
@@ -56,7 +55,7 @@ background: ${({ theme }) =>
   color: black;
   cursor: pointer;
   &:hover {
-    color: ${({ theme }) => theme === "light" ? "#f9f9f9" : "#ff8c00"};
+    color: ${({ theme }) => (theme === "light" ? "#f9f9f9" : "#ff8c00")};
   }
   &:active {
     color: black;
@@ -68,10 +67,10 @@ background: ${({ theme }) =>
       color: black;
     }
   }
-`
+`;
 export const FavBtnsWrapper = styled.div`
   gap: 30px;
   display: flex;
   justify-content: center;
   padding-top: 30px;
-`
+`;

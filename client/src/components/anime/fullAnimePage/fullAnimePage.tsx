@@ -1,45 +1,39 @@
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addMangaToFavorite,
-  getFullMangaInfo,
-  removeMangaFromFavorite,
-} from "../redux/reducer/mangaSlice/mangaSlice";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { ThreeCircles } from "react-loader-spinner";
-import { axiosData } from "../axios/api";
-import {
-  FullInfoAll,
-  FullInfoImgAndTitleWrapper,
-  FullInfoImg,
-  FullTitleAndAboutWrapper,
-  FullInfoTitle,
-  FullInfoAbout,
-  RatingIcon,
-  RatingWrapper,
-  FavBtnsWrapper,
-  FavBtn,
-} from "../common/fullInfoPage.Styles";
-import { useTheme } from "../../themeContext";
-import { Loader } from "../common/loader.Styles";
-import { MoreInfo } from "./fullMangaPageMoreInfo/fullMangaPageMoreInfo";
-import { useAppDispatch } from "../redux/hooks";
-import { IRootState } from "../redux/store";
-import { MangaType } from "../redux/reducer/mangaSlice/manga.types";
-import { AnimeType } from "../redux/reducer/animeSlice/anime.types";
 
-const RatingLogo = require("../img/RatingLogo.png");
 
-export const FullInfoManga = () => {
-  const FullInfoMangaStore = useSelector(
-    (state: IRootState) => state.manga.fullMangaInfoArr
+
+
+
+import { MoreInfo } from "./fullAnimePageMoreInfo/fullAnimePageMoreInfo";
+import { useTheme } from "../../../themeContext";
+import { axiosData } from "../../axios/api";
+import { FullInfoAll, FullInfoImgAndTitleWrapper, FullInfoImg, FullTitleAndAboutWrapper, RatingWrapper, RatingIcon, FullInfoTitle, FullInfoAbout, FavBtnsWrapper, FavBtn } from "../../common/fullInfoPage.Styles";
+import { Loader } from "../../common/loader.Styles";
+import { useAppDispatch } from "../../redux/hooks";
+import { AnimeType } from "../../redux/reducer/animeSlice/anime.types";
+import { getFullAnimeInfo, addAnimeToFavorite, removeAnimeFromFavorite } from "../../redux/reducer/animeSlice/animeSlice";
+import { MangaType } from "../../redux/reducer/mangaSlice/manga.types";
+import { IRootState } from "../../redux/store";
+
+
+const RatingLogo = require("../../../img/RatingLogo.png");
+
+export const FullInfoAnime = () => {
+  const FullInfoAnimeStore = useSelector(
+    (state: IRootState) => state.anime.fullAnimeInfoArr
   );
+
   const [loading, isLoading] = useState<boolean>(true);
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const currentTheme = useTheme();
   const [disabledAddFav, setDisabledAddFav] = useState<boolean>(false);
   const [disabledRemoveFav, setDisabledRemoveFav] = useState<boolean>(true);
+
   const FavoriteAnimeStore = useSelector(
     (state: IRootState) => state.anime.favoriteAnimeArr
   );
@@ -48,45 +42,50 @@ export const FullInfoManga = () => {
   );
 
   const favoriteArr = [...FavoriteMangaStore, ...FavoriteAnimeStore].flat();
-  const getFullMangaInformation = async () => {
+
+  const getFullAnimeInformation = async () => {
     try {
       isLoading(true);
-      const resultFullInfoManga = await axiosData.get(`/manga/${id}`);
+      const resultFullInfoAnime = await axiosData.get(`/anime/${id}`);
       isLoading(false);
-      check1(id, FullInfoMangaStore.attributes?.canonicalTitle);
-      dispatch(getFullMangaInfo({ fullInfo: resultFullInfoManga.data.data }));
+      check1(id, FullInfoAnimeStore.attributes?.canonicalTitle);
+      dispatch(getFullAnimeInfo({ fullInfo: resultFullInfoAnime.data.data }));
     } catch (err) {
       console.log(err);
     }
   };
-
   useEffect(() => {
-    getFullMangaInformation();
+    getFullAnimeInformation();
   }, []);
 
   const check1 = (id: string | undefined, name: string | undefined) => {
-    let check = favoriteArr.find((item: any) => item.id === id);
-    let check2 = favoriteArr.find((item: AnimeType | MangaType | undefined) => item?.attributes?.canonicalTitle === name);
+    let check = favoriteArr.find((item) => item.id === id);
+    let check2 = favoriteArr.find(
+      (item: AnimeType | MangaType | undefined) =>
+        item?.attributes?.canonicalTitle === name
+    );
 
     if (check === undefined || check2 === undefined) {
       setDisabledAddFav(false);
       setDisabledRemoveFav(true);
-    } else {setDisabledAddFav(true);
-    setDisabledRemoveFav(false);
+    } else {
+      setDisabledAddFav(true);
+      setDisabledRemoveFav(false);
     }
   };
 
   const addToFav = () => {
-    dispatch(addMangaToFavorite());
+    dispatch(addAnimeToFavorite());
     setDisabledAddFav(true);
     setDisabledRemoveFav(false);
   };
 
   const removeFromFav = (id: any) => {
-    dispatch(removeMangaFromFavorite(id));
+    dispatch(removeAnimeFromFavorite(id));
     setDisabledAddFav(false);
     setDisabledRemoveFav(true);
   };
+
   return (
     <>
       <Loader>
@@ -103,35 +102,35 @@ export const FullInfoManga = () => {
           <FullInfoImgAndTitleWrapper>
             <div>
               <FullInfoImg
-                src={FullInfoMangaStore.attributes?.posterImage.original}
+                src={FullInfoAnimeStore.attributes?.posterImage.original}
               />
               <MoreInfo />
             </div>
             <FullTitleAndAboutWrapper theme={currentTheme.theme}>
               <RatingWrapper>
-                {!FullInfoMangaStore.attributes?.averageRating
+                {!FullInfoAnimeStore.attributes?.averageRating
                   ? "no rating"
-                  : `${FullInfoMangaStore.attributes.averageRating}`}{" "}
+                  : `${FullInfoAnimeStore.attributes.averageRating}`}{" "}
                 <RatingIcon src={RatingLogo} alt="" />
               </RatingWrapper>
               <FullInfoTitle>
-                {FullInfoMangaStore.attributes?.canonicalTitle}
+                {FullInfoAnimeStore.attributes?.canonicalTitle}
               </FullInfoTitle>
               <FullInfoAbout>
-                {FullInfoMangaStore.attributes?.description}
+                {FullInfoAnimeStore.attributes?.description}
               </FullInfoAbout>
               <FavBtnsWrapper>
                 <FavBtn
+                  disabled={disabledAddFav}
                   theme={currentTheme.theme}
                   onClick={() => addToFav()}
-                  disabled={disabledAddFav}
                 >
                   add to fav
                 </FavBtn>
                 <FavBtn
-                  theme={currentTheme.theme}
-                  onClick={() => removeFromFav(FullInfoMangaStore.id)}
                   disabled={disabledRemoveFav}
+                  theme={currentTheme.theme}
+                  onClick={() => removeFromFav(FullInfoAnimeStore.id)}
                 >
                   remove from fav
                 </FavBtn>

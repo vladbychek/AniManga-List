@@ -17,7 +17,7 @@ export const ThemeContext = React.createContext<ThemeContextType>({
 });
 type ThemeProviderProps = {
   children: ReactElement;
-}
+};
 
 export const useTheme = () => {
   return useContext(ThemeContext);

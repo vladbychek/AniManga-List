@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const AllMainPages = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -15,8 +14,8 @@ export const MainPageContent = styled.div`
 `;
 
 export const MainPageText = styled.div`
-font-weight: bold;
-color: ${({ theme }) => (theme === "light" ? "black" : "white")};
-   padding: 15px 0; 
-   font-family: "PT Serif", serif;
-`
+  font-weight: bold;
+  color: ${({ theme }) => (theme === "light" ? "black" : "white")};
+  padding: 15px 0;
+  font-family: "PT Serif", serif;
+`;

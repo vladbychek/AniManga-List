@@ -1,5 +1,5 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import {  useNavigate } from "react-router-dom";
+import { ChangeEvent, FormEvent, useState } from "react";
 import {
   FormWrapper,
   FormTitle,
@@ -17,7 +17,7 @@ import { loginUser } from "../redux/reducer/auth/actionCreators";
 import { useSelector } from "react-redux";
 import { IRootState } from "../redux/store";
 
-const Logged = require("../img/logged.png");
+const Logged = require("../../img/logged.png");
 
 
 export const LoginForm = () => {
@@ -34,7 +34,7 @@ export const LoginForm = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     dispatch(loginUser({ login, password }));
-    navigate("/manga");
+    navigate("/");
   };
 
   return (

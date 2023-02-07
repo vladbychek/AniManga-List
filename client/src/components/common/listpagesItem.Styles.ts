@@ -1,14 +1,12 @@
 import styled from "styled-components";
 interface Props {
-   img: string | undefined;
+  img: string | undefined;
 }
-
 
 export const ListsPagesWrapper = styled.div`
   border-radius: 5px 5px 5px 5px;
   box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 `;
-
 
 export const ListsPages = styled.div<Props>`
   background-image: url(${(p) => p.img});

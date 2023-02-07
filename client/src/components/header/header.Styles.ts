@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.div`
   width: 100%;
   height: 85px;
-  background-color: ${({ theme }) => (theme === "light" ? "#ff8c00" : "#212529")};
+  background-color: ${({ theme }) =>
+    theme === "light" ? "#ff8c00" : "#212529"};
   font-family: "Rubik Bubbles", cursive;
   font-size: 30px;
 `;
@@ -30,27 +31,25 @@ export const HeaderLinks = styled.div`
 
 export const HeaderElement = styled.div`
   color: ${({ theme }) => (theme === "light" ? "black" : "white")};
-  &:hover{
+  &:hover {
     text-shadow: red 2px 5px;
-  };
-    &:active{
-      text-shadow: none;
-  };
-`
-
-
+  }
+  &:active {
+    text-shadow: none;
+  }
+`;
 
 export const HeaderLogoutBtn = styled.button`
   background: none;
   color: ${({ theme }) => (theme === "light" ? "black" : "white")};
   font-family: "Rubik Bubbles", cursive;
   font-size: 30px;
-border: none;
-cursor: pointer;
-&:hover{
-  text-shadow: red 2px 5px;
-};
-  &:active{
+  border: none;
+  cursor: pointer;
+  &:hover {
+    text-shadow: red 2px 5px;
+  }
+  &:active {
     text-shadow: none;
-};
-`
+  }
+`;

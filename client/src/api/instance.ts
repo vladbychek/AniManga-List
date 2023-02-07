@@ -1,5 +1,8 @@
 import axios, { AxiosError } from "axios";
-import { getAccessToken, logoutUser } from "../components/redux/reducer/auth/actionCreators";
+import {
+  getAccessToken,
+  logoutUser,
+} from "../components/redux/reducer/auth/actionCreators";
 import { store } from "../components/redux/store";
 import { Endpoints } from "./endpoints";
 
@@ -11,7 +14,7 @@ const urlsSkipAuth = [
   Endpoints.AUTH.LOGOUT,
 ];
 
-axiosInstance.interceptors.request.use(async (config:any) => {
+axiosInstance.interceptors.request.use(async (config: any) => {
   if (config.url && urlsSkipAuth.includes(config.url)) {
     return config;
   }
@@ -45,4 +48,4 @@ axiosInstance.interceptors.response.use(
 
     throw error;
   }
-)
+);

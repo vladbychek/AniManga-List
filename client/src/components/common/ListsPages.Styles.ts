@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const AllListsPages = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -37,7 +36,13 @@ export const SortBtn = styled.button`
   &:hover {
     text-shadow: #fc0 1px 0 10px;
   }
-  &:active {
+  &:disabled {
+    cursor: auto;
+    background: gray;
+    &: hover {
+      color: black;
+      text-shadow: none;
+    }
   }
 `;
 

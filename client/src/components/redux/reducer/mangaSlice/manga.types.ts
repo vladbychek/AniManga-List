@@ -16,7 +16,7 @@ export interface MangaType {
     volumeCount: number;
     serialization: string;
   };
-};
+}
 
 export type MangaArrType = Array<MangaType>;
 
@@ -27,16 +27,16 @@ export interface MangaStateType {
   currMangaPage: number;
   mainPageMangaArr: MangaArrType;
   favoriteMangaArr: MangaArrType;
-};
+}
 
 export interface MangaNewArrType {
   newArr: MangaArrType;
-};
+}
 
 export interface MangaFullInfoType {
   fullInfo: MangaType;
-};
+}
 
 export interface MangaMainPageType {
   mainPageArr: MangaArrType;
-};
+}

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 interface Props {
   img: string | undefined;
-};
+}
 
 export const MainPagesItemWrapper = styled.div`
   border-radius: 5px 5px 5px 5px;
@@ -9,7 +9,7 @@ export const MainPagesItemWrapper = styled.div`
 `;
 
 export const MainPagesItemTitle = styled.div`
-font-family: "PT Serif", serif;
+  font-family: "PT Serif", serif;
 
   background-image: linear-gradient(
     0deg,

@@ -1,13 +1,9 @@
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useTheme } from "../../themeContext";
-import {
-  ListsPages,
-  ListsPagesTitle,
-  ListsPagesWrapper,
-} from "../common/listpagesItem.Styles";
-import { AllListsPages, ListsPageContent } from "../common/ListsPages.Styles";
+import { useSelector } from "react-redux";
 import { IRootState } from "../redux/store";
+
+import { useTheme } from "../../themeContext";
+
 import {
   FavEmptyWrapper,
   FavEmptyText,
@@ -19,7 +15,7 @@ import {
   FavPagesWrapper,
 } from "./favorite.Styles";
 
-const favimg = require("../img/favimg.png");
+const favimg = require("../../img/favimg.png");
 
 export const Favorite = () => {
   const FavoriteAnimeStore = useSelector(
