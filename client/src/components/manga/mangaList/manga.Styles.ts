@@ -33,9 +33,6 @@ export const SortBtn = styled.button`
   border-radius: 5px;
   color: black;
   cursor: pointer;
-  &:hover {
-    text-shadow: #fc0 1px 0 10px;
-  }
   &:disabled {
     cursor: auto;
     background: gray;
@@ -73,5 +70,13 @@ export const PaginationBtn = styled.button`
   &:hover {
   }
   &:active {
+  }
+  &:disabled {
+    cursor: auto;
+    background: gray;
+    &: hover {
+      color: black;
+      text-shadow: none;
+    }
   }
 `;
